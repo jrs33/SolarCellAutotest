@@ -7,8 +7,8 @@ This function simulates the cell selection
 def cellSelect():
     GPIO.setmode(GPIO.BOARD)
 
-    pinNum = input('Simulates the cell selection (Enter 5): ')
-    return 5
+    pinNum = input('Simulates the cell selection (Enter ): ')
+    return 8
     
 
 '''
