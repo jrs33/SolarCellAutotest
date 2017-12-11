@@ -28,8 +28,8 @@ class ADCThread(Thread):
         # Read all the ADC channel values in a list.
         for i in range(20):
             values = [0]*1
-            values[0] = mcp.read_adc(0) * (3.3/1023)
+            values[0] = (mcp.read_adc(0) * (3.3/1023))/1000
             # Print the ADC values.
-            print(str(values[0]) + ' V')
+            print(str(values[0]) + ' A')
             # Pause for half a second.
             time.sleep(0.5)
