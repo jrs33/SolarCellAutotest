@@ -1,4 +1,4 @@
-class guiSetupConstants(object):
+class GuiSetupConstants(object):
     def __init__(self):
         self.TITLE = "SolarBytes Control Panel"
         self.DIMENSIONS = "400x400"
@@ -54,5 +54,4 @@ class guiSetupConstants(object):
     @SUPPLICANT_PATH.setter
     def SUPPLICANT_PATH(self, SUPPLICANT_PATH):
         self.__SUPPLICANT_PATH = "/etc/wpa_supplicant/wpa_supplicant.conf"
-
     
