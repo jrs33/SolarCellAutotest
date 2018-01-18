@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import tkinter
 import os
 
@@ -5,8 +7,8 @@ import os
 Initial code used to create the window and add title, color and dimensions and create stylistic constants
 '''
 window = tkinter.Tk()
-window.title("Solar Bytes Setup")
-window.geometry("1300x1300")
+window.title("SolarBytes Control Panel")
+window.geometry("400x400")
 BACKGROUND_COLOR = '#fdb603'
 FONT_SETTINGS_HEADER = ('Helvetica', '16', 'bold')
 FONT_SETTINGS_BODY = ('Helvetica', '12')
@@ -48,7 +50,8 @@ Callback function definitions
 def saveWifiRebootPi():
     new_wifi_network = supplicant_entry.get("1.0", "end-1c")
     supplicant_file = open(SUPPLICANT_PATH,'a')
-    supplicant_file.write(new_wifi_network)
+    supplicant_file.write('\n' + new_wifi_network)
     supplicant_file.close()
+    os.system('sudo reboot')
 
 window.mainloop()
