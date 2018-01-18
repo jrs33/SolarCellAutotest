@@ -3,29 +3,31 @@
 import tkinter
 import os
 
-import guiSetupConstants as gsc
+from guiSetupConstants import guiSetupConstants
 
 '''
 Initial code used to create the window and add title, color and dimensions and create stylistic constants
 '''
+constants = guiSetupConstants()
+constants.TITLE = "LOL"
 window = tkinter.Tk()
-window.title(gsc.TITLE)
-window.geometry(gsc.DIMENSIONS)
-window.configure(background=gsc.BACKGROUND_COLOR)
+window.title(constants.TITLE)
+window.geometry(constants.DIMENSIONS)
+window.configure(background=constants.BACKGROUND_COLOR)
 
 '''
 Create all widgets to be packed into window
 '''
 header = tkinter.Label(window,
                        text='\nSolarBytes WiFi/Server Configuration\n\n',
-                       font=gsc.FONT_SETTINGS_HEADER,
-                       bg=gsc.BACKGROUND_COLOR)
+                       font=constants.HEADER_FONT_SETTINGS,
+                       bg=constants.BACKGROUND_COLOR)
 wifi_entry_description = tkinter.Label(window,
                                        text='Obtain wpa_supplicant network credentials \nfrom your network administrator and \nenter in the below field:',
                                        anchor="w",
                                        justify="left",
-                                       font=gsc.FONT_SETTINGS_BODY,
-                                       bg=gsc.BACKGROUND_COLOR)
+                                       font=constants.BODY_FONT_SETTINGS,
+                                       bg=constants.BACKGROUND_COLOR)
                                        
 supplicant_entry = tkinter.Text(window,
                                 height=11)
@@ -47,7 +49,7 @@ Callback function definitions
 '''
 def saveWifiRebootPi():
     new_wifi_network = supplicant_entry.get("1.0", "end-1c")
-    supplicant_file = open(gsc.SUPPLICANT_PATH,'a')
+    supplicant_file = open(constants.SUPPLICANT_PATH,'a')
     supplicant_file.write('\n' + new_wifi_network)
     supplicant_file.close()
     os.system('sudo reboot')
