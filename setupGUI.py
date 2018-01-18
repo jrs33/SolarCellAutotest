@@ -1,4 +1,5 @@
 import tkinter
+import os
 
 '''
 Initial code used to create the window and add title, color and dimensions and create stylistic constants
@@ -9,6 +10,7 @@ window.geometry("1300x1300")
 BACKGROUND_COLOR = '#fdb603'
 FONT_SETTINGS_HEADER = ('Helvetica', '16', 'bold')
 FONT_SETTINGS_BODY = ('Helvetica', '12')
+SUPPLICANT_PATH = '/etc/wpa_supplicant/wpa_supplicant.conf'
 window.configure(background=BACKGROUND_COLOR)
 
 '''
@@ -45,10 +47,8 @@ Callback function definitions
 '''
 def saveWifiRebootPi():
     new_wifi_network = supplicant_entry.get("1.0", "end-1c")
-    supplicant_file = open('/etc/wpa_supplicant/wpa_supplicant.conf','a')
+    supplicant_file = open(SUPPLICANT_PATH,'a')
     supplicant_file.write(new_wifi_network)
     supplicant_file.close()
-    
-    
 
 window.mainloop()
