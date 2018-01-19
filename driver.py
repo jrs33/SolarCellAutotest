@@ -1,3 +1,4 @@
+#!/usr/bin/env python2
 from threading import Thread
 import time
 import RPi.GPIO as GPIO
