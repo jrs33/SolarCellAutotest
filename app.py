@@ -9,7 +9,8 @@ def index():
 
 @app.route('/testEDS')
 def testEDS():
-    os.system('./driver.py')
+    average = os.system('./driver.py')
+    print('JASDKLASJDLK ' + str(average))
     return 'Test complete'
 
 app.run(debug=True, host='0.0.0.0')

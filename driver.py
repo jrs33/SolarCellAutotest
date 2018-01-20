@@ -1,19 +1,21 @@
 #!/usr/bin/env python2
-from threading import Thread
 import time
 import RPi.GPIO as GPIO
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
 
-from gpioSwitchThread import *# setup as a package
-from ADCThread import *# setup as a package
-            
-# Setting up threads 
-gpioThread = gpioSwitchThread(0)
-adcThread = ADCThread(1)
+from GPIOControlFactory import *
+from ADCControlFactory import *
 
-# 10 Second test for Solar Cell Data Acquisition System
-gpioThread.start()
-adcThread.start()
+def runEDSTest():
+    gpio = GPIOControlFactory(0)
+    adc = ADCControlFactory(0)
 
-print('TEST COMPLETE')
+    selectedCell = gpio.cellSelect()
+    gpio.engageGPIO(selectedCell)
+    average = adc.gatherADCData()
+    gpio.disengageGPIO(selectedCell)
+
+    return average
+
+runEDSTest()
