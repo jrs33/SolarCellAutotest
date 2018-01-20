@@ -1,5 +1,6 @@
 import tkinter as tk
 import wifiFunctions as wf
+import webServerFunctions as wsf
 
 class SolarBytesControlPanelApp:
     def __init__(self, window, constants):
@@ -40,3 +41,8 @@ class SolarBytesControlPanelApp:
                                             text="Clear Supplicant File",
                                             command=lambda: wf.clearSupplicantFile(self.constants.SUPPLICANT_PATH))
         clear_supplicant_button.pack()
+
+        start_server_button = tk.Button(self.window,
+                                        text="Start up web server",
+                                        command=lambda: wsf.startUpWebServer(self.constants.WEB_APP_PATH))
+        start_server_button.pack()

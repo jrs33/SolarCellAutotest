@@ -6,6 +6,7 @@ class GuiSetupConstants(object):
         self.HEADER_FONT_SETTINGS = ('Helvetica', '16', 'bold')
         self.BODY_FONT_SETTINGS = ('Helvetica', '12')
         self.SUPPLICANT_PATH = "/etc/wpa_supplicant/wpa_supplicant.conf"
+        self.WEB_APP_PATH = "/home/pi/SolarCellAutotest"
 
     @property
     def TITLE(self):
@@ -54,4 +55,12 @@ class GuiSetupConstants(object):
     @SUPPLICANT_PATH.setter
     def SUPPLICANT_PATH(self, SUPPLICANT_PATH):
         self.__SUPPLICANT_PATH = "/etc/wpa_supplicant/wpa_supplicant.conf"
+
+    @property
+    def WEB_APP_PATH(self):
+        return self.__WEB_APP_PATH
+
+    @WEB_APP_PATH.setter
+    def WEB_APP_PATH(self, WEB_APP_PATH):
+        self.__WEB_APP_PATH = "/home/pi/SolarCellAutotest"
     
