@@ -3,5 +3,9 @@ import os
 
 def startUpWebServer(WEB_APP_PATH):
     os.chdir(WEB_APP_PATH)
-    Popen(['xterm', '-e', 'python app.py'])
-    return
+    global pid
+    pid = Popen(['xterm', '-e', 'python app.py'])
+    return pid
+
+def killWebServer():
+    pid.kill()
