@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 from GuiSetupConstants import GuiSetupConstants
 import SolarBytesControlPanelGUI as sbgui
 import tkinter as tk

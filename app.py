@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from flask import Flask, render_template
 import os
 
@@ -9,8 +10,7 @@ def index():
 
 @app.route('/testEDS')
 def testEDS():
-    average = os.system('./driver.py')
-    print('JASDKLASJDLK ' + str(average))
+    os.system('./driver.py')
     return 'Test complete'
 
 app.run(debug=True, host='0.0.0.0')
