@@ -13,6 +13,11 @@ def runEDSTest():
     adc = ADCControlFactory(0)
     transporter = DataTransportFactory(0)
 
+    # TODO: Need to implement test logic to
+    #
+    # 1) Run test and gather data
+    # 2) Activate EDS
+    # 3) Run same test again to get cleaning ratio
     selectedCell = gpio.cellSelect()
     gpio.engageGPIO(selectedCell)
     average = adc.gatherADCData()
