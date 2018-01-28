@@ -16,10 +16,14 @@ class DataTransportFactory(object):
     Transports test data to local mounted USB
     '''
     def transportToUSB(self,ratio=0,cellNumber=0,time=0,temperature=0,humidity=0):
+        with open('/media/usb/solarbytes.csv', 'a') as file:
+            solarBytesWriter = csv.writer(file)
+            solarBytesWriter.writerow([ratio,cellNumber,time,temperature,humidity])
 
 
     '''
     Transports test data to cloud hosted MySQL instance
     '''
     def transportToCloud(self,ratio=0,cellNumber=0,time=0,temperature=0,humidity=0):
-        
+        # TODO: Need to write function
+        return
