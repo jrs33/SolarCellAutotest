@@ -18,17 +18,6 @@ class GPIOControlFactory(object):
         self.val = val
 
     '''
-    This function simulates the cell selection sets GPIO14 as the pin
-    to engage the transistor. Identical to a binary select for one cell
-
-    TODO: MUST BE ALTERED TO INTERFACE WITH MULTIPLE CELLS. Will need
-    to replace with a 3-bit binary to interfaec 8 cells with a relay
-    '''
-    def cellSelect(self):
-        GPIO.setmode(GPIO.BCM)
-        return 14
-
-    '''
     Setups up the GPIO #PIN as OUT and turns it on
     '''
     def engageGPIO(self, PIN):
