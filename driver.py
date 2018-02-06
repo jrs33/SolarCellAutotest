@@ -8,23 +8,33 @@ from GPIOControlFactory import *
 from ADCControlFactory import *
 from DataTransportFactory import *
 
+'''
+This is an abstracted function to run the logic
+for our EDS tests. The tests go as follows:
+
+1) Run test on selected cell without the EDS running
+2) Record the data from this these locally and remotely
+3) Pause the test and turn on the EDS for 2 minutes
+4) Turn off the EDS
+5) Repeat 1 & 2
+6) Compare the ratios of before and after cleaning to get
+EDS effectiveness
+'''
 def runEDSTest():
     gpio = GPIOControlFactory(0)
     adc = ADCControlFactory(0)
     transporter = DataTransportFactory(0)
 
-    # TODO: Need to implement test logic to
-    #
-    # 1) Run test and gather data
-    # 2) Activate EDS
-    # 3) Run same test again to get cleaning ratio
+    # Step 1
     selectedCell = gpio.cellSelect()
     gpio.engageGPIO(selectedCell)
     average = adc.gatherADCData()
     gpio.disengageGPIO(selectedCell)
 
+    # Step 2
     transporter.transportToUSB(average)
 
-    return average
+    # Step 3
+    
 
 runEDSTest()
