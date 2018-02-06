@@ -30,7 +30,8 @@ def runEDSTest():
     eds = EDSControlFactory(0)
 
     # Step 1 and 2
-    selectedCell = gpio.cellSelect()
+    GPIO.setmode(GPIO.BCM)
+    selectedCell = 26
     gpio.engageGPIO(selectedCell)
     averagePreClean = adc.gatherADCData()
     gpio.disengageGPIO(selectedCell)
@@ -45,7 +46,9 @@ def runEDSTest():
     gpio.disengageGPIO(selectedCell)
 
     # Step 5
-    ratio = averagePostClean/averagePreClean
+    ratio = 0
+    if averagePreClean != 0:
+        ratio = averagePostClean/averagePreClean
     transporter.transportToUSB(ratio,selectedCell,str(datetime.now()))
 
 runEDSTest()

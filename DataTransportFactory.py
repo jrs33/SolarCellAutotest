@@ -19,7 +19,7 @@ class DataTransportFactory(object):
         with open('/media/usb/solarbytes.csv', 'a') as file:
             solarBytesWriter = csv.writer(file)
             solarBytesWriter.writerow([ratio,cellNumber,time,temperature,humidity])
-
+            print("Data written to local USB") 
 
     '''
     Transports test data to cloud hosted MySQL instance

@@ -34,14 +34,13 @@ class ADCControlFactory(object):
 
         # Read all the ADC channel values in a list.
         total = 0
+	print("Interpreting data...")
         for i in range(20):
             values = [0]*1
             values[0] = (mcp.read_adc(0) * (3.3/1023))/1000
             # Print the ADC values.
             total = total + values[0]
-            print(str(values[0]) + ' A')
             # Pause for half a second.
             time.sleep(0.5)
 
-        print('Average: ' + str(total/20.0))
         return total/20.0

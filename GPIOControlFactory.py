@@ -21,12 +21,15 @@ class GPIOControlFactory(object):
     Setups up the GPIO #PIN as OUT and turns it on
     '''
     def engageGPIO(self, PIN):
+        GPIO.setmode(GPIO.BCM)
         GPIO.setup(PIN, GPIO.OUT)
-        GPIO.output(PIN, True)
+        GPIO.output(PIN, GPIO.LOW)
+	print("Test started...")
 
     '''
     Turns off the selected GPIO #PIN
     '''
     def disengageGPIO(self, PIN):
-        GPIO.output(PIN, False)
+        GPIO.setmode(GPIO.BCM)
+        GPIO.output(PIN, GPIO.HIGH)
         GPIO.cleanup()

@@ -23,7 +23,8 @@ class EDSControlFactory(object):
         GPIO.output(PIN, True)
 
         cleaningTime = 120
-        time.sleep(120)
+        print("Cleaning the cells...")
+        time.sleep(cleaningTime)
 
     def disengagePowerSupply(self):
         GPIO.output(22, False)
