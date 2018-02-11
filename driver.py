@@ -1,4 +1,3 @@
-#!/usr/bin/env python2
 import time
 import RPi.GPIO as GPIO
 import Adafruit_GPIO.SPI as SPI
@@ -23,7 +22,7 @@ for our EDS tests. The tests go as follows:
 6) Compare the ratios of before and after cleaning and
 store data locally and remotely 
 '''
-def runEDSTest():
+def runEDSTest(selectedCell):
     gpio = GPIOControlFactory(0)
     adc = ADCControlFactory(0)
     transporter = DataTransportFactory(0)
@@ -31,7 +30,6 @@ def runEDSTest():
 
     # Step 1 and 2
     GPIO.setmode(GPIO.BCM)
-    selectedCell = 26
     gpio.engageGPIO(selectedCell)
     averagePreClean = adc.gatherADCData()
     gpio.disengageGPIO(selectedCell)
