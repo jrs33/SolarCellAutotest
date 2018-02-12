@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from flask import Flask, render_template
-from driver import runEDSTest
+from solarCellTestDriver import runEDSTest
 
 app = Flask("SolarBytes")
 
