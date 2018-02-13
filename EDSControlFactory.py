@@ -21,7 +21,7 @@ class EDSControlFactory(object):
     def engagePowerSupplyAndClean(self):
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.constants.EDS_TRIGGER_PIN, GPIO.OUT)
-        GPIO.output(self.constants.EDS_TRIGGER_PIN, True)
+        GPIO.output(self.constants.EDS_TRIGGER_PIN, GPIO.HIGH)
 
         cleaningTime = 10
         print("Cleaning the cells...")
