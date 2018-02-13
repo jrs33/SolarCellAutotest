@@ -1,4 +1,5 @@
 import csv
+from TestingConstants import TestingConstants
 
 '''
 
@@ -11,12 +12,13 @@ class DataTransportFactory(object):
     '''
     def __init__(self,val):
         self.val = val
+	self.constants = TestingConstants()
 
     '''
     Transports test data to local mounted USB
     '''
     def transportToUSB(self,ratio=0,cellNumber=0,time=0,temperature=0,humidity=0):
-        with open('/media/usb/solarbytes.csv', 'a') as file:
+        with open(self.constants.CSV_PATH, 'a') as file:
             solarBytesWriter = csv.writer(file)
             solarBytesWriter.writerow([ratio,cellNumber,time,temperature,humidity])
             print("Data written to local USB") 
