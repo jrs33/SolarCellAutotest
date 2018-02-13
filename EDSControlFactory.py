@@ -22,7 +22,7 @@ class EDSControlFactory(object):
         GPIO.setup(PIN, GPIO.OUT)
         GPIO.output(PIN, True)
 
-        cleaningTime = 120
+        cleaningTime = 10
         print("Cleaning the cells...")
         time.sleep(cleaningTime)
 

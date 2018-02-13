@@ -42,5 +42,6 @@ class ADCControlFactory(object):
             total = total + values[0]
             # Pause for half a second.
             time.sleep(0.5)
+	    print(total)
 
         return total/20.0
