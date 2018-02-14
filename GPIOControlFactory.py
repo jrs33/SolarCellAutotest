@@ -24,7 +24,7 @@ class GPIOControlFactory(object):
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(PIN, GPIO.OUT)
         GPIO.output(PIN, GPIO.LOW)
-	print("Test started...")
+        print("Test started...")
 
     '''
     Turns off the selected GPIO #PIN

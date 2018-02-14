@@ -12,7 +12,7 @@ class DataTransportFactory(object):
     '''
     def __init__(self,val):
         self.val = val
-	self.constants = TestingConstants()
+        self.constants = TestingConstants()
 
     '''
     Transports test data to local mounted USB
@@ -21,11 +21,23 @@ class DataTransportFactory(object):
         with open(self.constants.CSV_PATH, 'a') as file:
             solarBytesWriter = csv.writer(file)
             solarBytesWriter.writerow([ratio,self.constants.PIN_TO_CELL_MAP[cellNumber],time,temperature,humidity])
-            print("Data written to local USB") 
+            print("Data written to local USB")
+
+    '''
+    Transports test data to hidden csv for backup
+    '''
+    def transportToBufferFile(self,ratio=0,cellNumber=0,time=0,temperature=0,humidity=0):
+        with open(self.constants.BUFFER_PATH, 'a') as backupFile:
+            backupFileWriter = csv.writer(backupFile)
+            backupFileWriter.writerow([ratio,self.constants.PIN_TO_CELL_MAP[cellNumber],time,temperature,humidity])
 
     '''
     Transports test data to cloud hosted MySQL instance
     '''
     def transportToCloud(self,ratio=0,cellNumber=0,time=0,temperature=0,humidity=0):
         # TODO: Need to write function
+        return
+
+    def retrieveData(self):
+        # TODO: Need to retrieve data in priority from cloud, USB or backup
         return

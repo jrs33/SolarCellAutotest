@@ -16,14 +16,14 @@ class EDSControlFactory(object):
     '''
     def __init__(self, val):
         self.val = val
-	self.constants = TestingConstants()
+        self.constants = TestingConstants()
 
     def engagePowerSupplyAndClean(self):
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(self.constants.EDS_TRIGGER_PIN, GPIO.OUT)
         GPIO.output(self.constants.EDS_TRIGGER_PIN, GPIO.HIGH)
 
-        cleaningTime = 10
+        cleaningTime = 120
         print("Cleaning the cells...")
         time.sleep(cleaningTime)
 

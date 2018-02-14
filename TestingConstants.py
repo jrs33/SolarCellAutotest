@@ -3,6 +3,7 @@ class TestingConstants(object):
 		self.PIN_TO_CELL_MAP = {12 : "1", 16 : "2", 20 : "3", 21 : "4", 6 : "5", 13 : "6", 19 : "7", 26 : "8"}
 		self.EDS_TRIGGER_PIN = 22
 		self.CSV_PATH = "/media/usb/solarbytes.csv"
+		self.BUFFER_PATH = "/home/pi/Desktop/.sbBuffer.csv"
 
 	@property
 	def PIN_TO_CELL_MAP(self):
@@ -27,3 +28,11 @@ class TestingConstants(object):
 	@CSV_PATH.setter
 	def CSV_PATH(self, CSV_PATH):
 		self.__CSV_PATH = "/media/usb/solarbytes.csv"
+
+	@property
+	def BUFFER_PATH(self):
+		return self.__BUFFER_PATH
+
+	@BUFFER_PATH.setter
+	def BUFFER_PATH(self, BUFFER_PATH):
+		self.__BUFFER_PATH = "/home/pi/Desktop/.sbBuffer.csv"

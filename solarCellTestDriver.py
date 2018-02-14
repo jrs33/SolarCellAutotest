@@ -48,5 +48,6 @@ def runEDSTest(selectedCell):
     if averagePreClean != 0:
         ratio = averagePostClean/averagePreClean
     transporter.transportToUSB(ratio,selectedCell,str(datetime.now()))
+    transporter.transportToBufferFile(ratio,selectedCell,str(datetime.now()))
 
     return ratio
