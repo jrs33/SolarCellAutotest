@@ -7,7 +7,7 @@ class GuiSetupConstants(object):
         self.BODY_FONT_SETTINGS = ('Helvetica', '12')
         self.SUPPLICANT_PATH = "/etc/wpa_supplicant/wpa_supplicant.conf"
         self.WEB_APP_PATH = "/home/pi/SolarCellAutotest"
-	self.NGROK_PATH = "/usr/bin/"
+        self.NGROK_PATH = "/usr/bin/"
 
     @property
     def TITLE(self):
@@ -67,7 +67,7 @@ class GuiSetupConstants(object):
 
     @property
     def NGROK_PATH(self):
-        self.__NGROK_PATH = "/usr/bin/"
+        return self.__NGROK_PATH
 
     @NGROK_PATH.setter
     def NGROK_PATH(self, NGROK_PATH):

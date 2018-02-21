@@ -44,7 +44,7 @@ class SolarBytesControlPanelApp:
 
         start_server_button = tk.Button(self.window,
                                         text="Start up web server",
-                                        command=lambda: wsf.startUpWebServer(self.constants.WEB_APP_PATH))
+                                        command=lambda: wsf.startUpWebServer(self.constants.WEB_APP_PATH, self.constants.NGROK_PATH))
         start_server_button.pack()
 
         stop_server_button = tk.Button(self.window,
