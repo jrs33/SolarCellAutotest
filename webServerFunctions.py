@@ -9,3 +9,7 @@ def startUpWebServer(WEB_APP_PATH):
 
 def killWebServer():
     pid.kill()
+
+def createNgrokTunnel(NGROK_PATH):
+    os.chdir(NGROK_PATH)
+    os.system("./ngrok http 5000")

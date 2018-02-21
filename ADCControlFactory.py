@@ -42,6 +42,7 @@ class ADCControlFactory(object):
             total = total + values[0]
             # Pause for half a second.
             time.sleep(0.5)
+            print(values[0])
 	    # TODO; need to implement a check here for sun coverage
 
         return total/20.0
