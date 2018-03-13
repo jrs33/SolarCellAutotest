@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
+import sqlite3
 from flask import Flask, render_template
 from solarCellTestDriver import runEDSTest
+from flask_sqlalchemy import SQLAlchemy
 from TestingConstants import TestingConstants
 
 app = Flask("SolarBytes")
 constants = TestingConstants()
+db = sqlite3.connect(constants.SQL_DATABASE)
+sqlFactory = db.cursor()
 
 @app.route('/')
 def index():

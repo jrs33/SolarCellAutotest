@@ -4,6 +4,7 @@ class TestingConstants(object):
 		self.EDS_TRIGGER_PIN = 22
 		self.CSV_PATH = "/media/usb/solarbytes.csv"
 		self.BUFFER_PATH = "/home/pi/Desktop/.sbBuffer.csv"
+		self.SQL_DATABASE = "solarbytes.db"
 
 	@property
 	def PIN_TO_CELL_MAP(self):
@@ -36,3 +37,11 @@ class TestingConstants(object):
 	@BUFFER_PATH.setter
 	def BUFFER_PATH(self, BUFFER_PATH):
 		self.__BUFFER_PATH = "/home/pi/Desktop/.sbBuffer.csv"
+
+	@property
+	def SQL_DATABASE(self):
+		return "solarbytes.db"
+
+	@SQL_DATABASE.setter
+	def SQL_DATABASE(self, SQL_DATABASE):
+		self.__SQL_DATABASE = "solarbytes.db"
