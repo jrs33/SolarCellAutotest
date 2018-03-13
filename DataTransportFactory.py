@@ -1,4 +1,5 @@
 import csv
+import sqlite3
 from TestingConstants import TestingConstants
 
 '''
@@ -34,10 +35,13 @@ class DataTransportFactory(object):
     '''
     Transports test data to cloud hosted MySQL instance
     '''
-    def transportToCloud(self,ratio=0,cellNumber=0,time=0,temperature=0,humidity=0):
-        # TODO: Need to write function
-        return
+    def transportToDB(self,ratio=0,cellNumber=0,date=0,time=0,temperature=0,humidity=0):
+        db = sqlite3.connect(self.constants.SQL_DATABASE)
+        sqlCursor = db.cursor()
 
-    def retrieveData(self):
-        # TODO: Need to retrieve data in priority from cloud, USB or backup
+        test = [(date,time,cellNumber,ratio,temperature,humidity),]
+        sqlCursor.executemany('INSERT INTO solarTests VALUES (?,?,?,?,?,?)',test)
+
+        db.commit()
+        db.close()
         return

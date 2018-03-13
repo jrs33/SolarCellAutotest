@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
 
-from datetime import datetime
+from datetime import *
 
 from GPIOControlFactory import *
 from ADCControlFactory import *
@@ -43,11 +43,12 @@ def runEDSTest(selectedCell):
     averagePostClean = adc.gatherADCData()
     gpio.disengageGPIO(selectedCell)
 
-    # Step 5
+    # Step 5 ADD IN DATE AND TIME ISOLATION AND TEMPERATURE AND HUMIDITY
     ratio = 0
     if averagePreClean != 0:
         ratio = averagePostClean/averagePreClean
     transporter.transportToUSB(ratio,selectedCell,str(datetime.now()))
     transporter.transportToBufferFile(ratio,selectedCell,str(datetime.now()))
+    transporter.transportToDB(ratio,selectedCell,str(datetime.now()),str(datetime.now()))
 
     return ratio
