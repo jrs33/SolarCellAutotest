@@ -32,7 +32,10 @@ def runEDSTest(selectedCell):
     # Step 1 and 2
     GPIO.setmode(GPIO.BCM)
     gpio.engageGPIO(selectedCell)
-    averagePreClean = adc.gatherADCData()
+    try:
+        averagePreClean = adc.gatherADCData()
+    except ValueError as error:
+        return repr(error)
     gpio.disengageGPIO(selectedCell)
 
     # Step 3
@@ -41,7 +44,10 @@ def runEDSTest(selectedCell):
 
     # Step 4
     gpio.engageGPIO(selectedCell)
-    averagePostClean = adc.gatherADCData()
+    try:
+        averagePostClean = adc.gatherADCData()
+    except ValueError as error:
+        return repr(error)
     gpio.disengageGPIO(selectedCell)
 
     # Step 5 ADD IN DATE AND TIME ISOLATION AND TEMPERATURE AND HUMIDITY
