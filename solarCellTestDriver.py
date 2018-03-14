@@ -2,6 +2,7 @@ import time
 import RPi.GPIO as GPIO
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
+import time
 
 from datetime import *
 
@@ -49,6 +50,6 @@ def runEDSTest(selectedCell):
         ratio = averagePostClean/averagePreClean
     transporter.transportToUSB(ratio,selectedCell,str(datetime.now()))
     transporter.transportToBufferFile(ratio,selectedCell,str(datetime.now()))
-    transporter.transportToDB(ratio,selectedCell,str(datetime.now()),str(datetime.now()))
+    transporter.transportToDB(ratio,selectedCell,str(date.today()),str(time.time()))
 
     return ratio
