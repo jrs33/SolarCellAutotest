@@ -47,6 +47,7 @@ class DataTransportFactory(object):
     '''
     Transports test data to sql database
     '''
+    # TODO: ADD IN TYPE CHECKS AFTER FRONT END FINALIZED
     def transportToDB(self,
                       ratio=0,
                       cellNumber=0,
