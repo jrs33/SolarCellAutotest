@@ -16,7 +16,7 @@ class DataTransportFactory(object):
         self.val = val
         self.constants = TestingConstants()
         self.operations = ['IS','IS_NOT','GREATER','LESS']
-        self.rows = {'ratio':float,'cellNumber':int,'date':str,'time':float,'temperature',float,'humidity':float}
+        self.rows = {'ratio':float,'cellNumber':int,'date':str,'time':float,'temperature':float,'humidity':float}
 
     '''
     Transports test data to local mounted USB
@@ -56,8 +56,8 @@ class DataTransportFactory(object):
                       temperature=0,
                       humidity=0):
         try:
-            db = getDatabase()
-            sqlCursor = getDatabaseTunnel()
+            db = self.getDatabase()
+            sqlCursor = self.getDatabaseTunnel()
             
             test = [(date,time,cellNumber,ratio,temperature,humidity),]
             sqlCursor.executemany('INSERT INTO solarTests VALUES (?,?,?,?,?,?)',test)
@@ -71,11 +71,11 @@ class DataTransportFactory(object):
     def transportFromDB(self,
                         limit):
         try:
-            db = getDatabase()
-            sqlCursor = getDatabaseTunnel()
+            db = self.getDatabase()
+            sqlCursor = self.getDatabaseTunnel()
 
             queryString = 'SELECT * FROM solarTests LIMIT ' + str(limit) + ';'
-            results = []
+            results = list()
             for row in sqlCursor.execute(queryString):
                 results.append(row)
 
@@ -90,11 +90,11 @@ class DataTransportFactory(object):
                                 value,
                                 limit):
         try:
-            db = getDatabase()
-            sqlCursor = getDatabaseTunnel()
-            
-            queryString = 'SELECT * FROM solarTests WHERE ' + str(column) + ' ' + str(operation) + ' ' str(value) + ' LIMIT ' + str(limit) + ';'
-            results = []
+            db = self.getDatabase()
+            sqlCursor = self.getDatabaseTunnel()
+
+            queryString = 'SELECT * FROM solarTests WHERE ' + str(column) + ' ' + str(operation) + ' ' + str(value) + ' LIMIT ' + str(limit) + ';'
+            results = list()
             for row in sqlCursor.execute(queryString):
                 results.append(row)
 
@@ -107,11 +107,11 @@ class DataTransportFactory(object):
                                   column,
                                   operation):
         try:
-            db = getDatabase()
-            sqlCursor = getDatabaseTunnel()
+            db = self.getDatabase()
+            sqlCursor = self.getDatabaseTunnel()
 
             queryString = 'SELECT ' + str(operation) + '(' + str(column) + ') FROM solarTests'
-            results = []
+            results = list()
             for row in sqlCursor.execute(queryString):
                 results.append(row)
 
@@ -122,7 +122,7 @@ class DataTransportFactory(object):
 
     def getDatabaseTunnel(self):
         try:
-            db = getDatabase()
+            db = self.getDatabase()
             sqlCursor = db.cursor()
             return sqlCursor
         except Exception as error:

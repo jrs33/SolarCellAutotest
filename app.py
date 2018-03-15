@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from flask import Flask, render_template
+from flask.json import jsonify
 from solarCellTestDriver import runEDSTest
 from TestingConstants import TestingConstants
 from DataTransportFactory import DataTransportFactory
@@ -17,27 +18,33 @@ def testEDS(cellSelect):
     ratio = runEDSTest(cellSelect)
     return "Ratio for test on cell "+ constants.PIN_TO_CELL_MAP[cellSelect]  + " is " + str(ratio)
 
-@app.route('/data/filter/<str:col>/<str:op>/<str:val>')
+@app.route('/data/table/<limit>')
+def tableQuery(limit):
+    if(limit == ''):
+        return dataTrans.transportFromDB(10)
+    return jsonify({'rows': dataTrans.transportFromDB(limit)})
+
+@app.route('/data/filter/<op>/<col>/<val>')
 def filterQuery(op,
                 col,
                 val):
-    if(op == null or col == null or val == null):
+    if(op == '' or col == '' or val == ''):
         return null
     
-    if(request.args.get('limit')): # query parameter
+    '''if(request.args.get('limit')): # query parameter
         lim = request.args.get('limit')
-        return dataTrans.transportFromDBFiltered(col,op,val,lim)
-    return dataTrans.transportFromDBFiltered(col,op,val,10)
+        return dataTrans.transportFromDBFiltered(col,op,val,lim)'''
+    return jsonify({'rows': dataTrans.transportFromDBFiltered(col,op,val,10)})
 
-@app.route('/data/aggregate/<str:col>/<str:op>')
-def filterQuery(op,
-                col):
-    if(op == null or col == null):
+@app.route('/data/aggregate/<op>/<col>')
+def aggregateQuery(op,
+                   col):
+    if(op == '' or col == ''):
         return null
     
     if(request.args.get('limit')): # query parameter
         lim = request.args.get('limit')
         return dataTrans.transportFromDBAggregated(col,op,lim)
-    return dataTrans.transportFromDBAggregated(col,op,10)
+    return jsonify({'rows': dataTrans.transportFromDBAggregated(col,op,10)})
 
 app.run(debug=True, host='0.0.0.0')
