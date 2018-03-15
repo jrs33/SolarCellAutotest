@@ -75,6 +75,7 @@ class DataTransportFactory(object):
             sqlCursor = self.getDatabaseTunnel()
 
             queryString = 'SELECT * FROM solarTests LIMIT ' + str(limit) + ';'
+            print(queryString)
             results = list()
             for row in sqlCursor.execute(queryString):
                 results.append(row)
@@ -94,6 +95,7 @@ class DataTransportFactory(object):
             sqlCursor = self.getDatabaseTunnel()
 
             queryString = 'SELECT * FROM solarTests WHERE ' + str(column) + ' ' + str(operation) + ' ' + str(value) + ' LIMIT ' + str(limit) + ';'
+            print(queryString)
             results = list()
             for row in sqlCursor.execute(queryString):
                 results.append(row)
@@ -111,6 +113,7 @@ class DataTransportFactory(object):
             sqlCursor = self.getDatabaseTunnel()
 
             queryString = 'SELECT ' + str(operation) + '(' + str(column) + ') FROM solarTests'
+            print(queryString)
             results = list()
             for row in sqlCursor.execute(queryString):
                 results.append(row)

@@ -18,6 +18,11 @@ def testEDS(cellSelect):
     ratio = runEDSTest(cellSelect)
     return "Ratio for test on cell "+ constants.PIN_TO_CELL_MAP[cellSelect]  + " is " + str(ratio)
 
+@app.route('/testInsert')
+def testInsert():
+    dataTrans.transportToDB()
+    return "INSERTED DATA!"
+
 @app.route('/data/table/<limit>')
 def tableQuery(limit):
     if(limit == ''):
