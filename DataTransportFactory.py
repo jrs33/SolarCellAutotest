@@ -74,25 +74,32 @@ class DataTransportFactory(object):
             db = getDatabase()
             sqlCursor = getDatabaseTunnel()
 
-            queryString = 'SELECT * FROM solarTests LIMIT ' + str(limit)
-            sqlCursor.execute(queryString)
+            queryString = 'SELECT * FROM solarTests LIMIT ' + str(limit) + ';'
+            results = []
+            for row in sqlCursor.execute(queryString):
+                results.append(row)
 
             db.close()
+            return results
         except Exception as error:
             raise error
 
     def transportFromDBFiltered(self,
                                 column,
                                 operation,
-                                value):
+                                value,
+                                limit):
         try:
             db = getDatabase()
             sqlCursor = getDatabaseTunnel()
             
-            queryString = 'SELECT * FROM solarTests WHERE ' + str(column) + ' ' + str(operation) + ' ' str(value)
-            sqlCursor(queryString)
+            queryString = 'SELECT * FROM solarTests WHERE ' + str(column) + ' ' + str(operation) + ' ' str(value) + ' LIMIT ' + str(limit) + ';'
+            results = []
+            for row in sqlCursor.execute(queryString):
+                results.append(row)
 
             db.close()
+            return results
         except Exception as error:
             raise error
 
@@ -104,9 +111,12 @@ class DataTransportFactory(object):
             sqlCursor = getDatabaseTunnel()
 
             queryString = 'SELECT ' + str(operation) + '(' + str(column) + ') FROM solarTests'
-            sqlCursor(queryString)
+            results = []
+            for row in sqlCursor.execute(queryString):
+                results.append(row)
 
             db.close()
+            return results
         except Exception as error:
             raise error
 
