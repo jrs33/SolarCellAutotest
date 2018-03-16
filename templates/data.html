@@ -9,27 +9,30 @@
 			<div class="row" align="center" style="margin-top:20px">
 				<h1 style="color: #ffffff">SolarBytes Data Visualizer</h1>
 			</div>
-			<hr>
 			<div class="row" align="center">
-				<table style="border: 1px solid black">
-				<tr>
-					<th>TestDate</th>
-					<th>TestTime</th>
-					<th>Cell</th>
-					<th>Ratio</th>
-					<th>Temperature</th>
-					<th>Humidity</th>
-				</tr>
-				{% for row in results %}
-				<tr align="center">
-					<td>{{row[0]}}</td>
-					<td>{{row[1]}}</td>
-					<td>{{row[2]}}</td>
-					<td>{{row[3]}}</td>
-					<td>{{row[4]}}</td>
-					<td>{{row[5]}}</td> 
-				</tr>
-				{% endfor %}
+				<table class="table" style="background-color: #ffffff">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">TestDate</th>
+						<th scope="col">TestTime</th>
+						<th scope="col">Cell</th>
+						<th scope="col">Ratio</th>
+						<th scope="col">Temperature</th>
+						<th scope="col">Humidity</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for row in results %}
+					<tr>
+						<td>{{row[0]}}</td>
+						<td>{{row[1]}}</td>
+						<td>{{row[2]}}</td>
+						<td>{{row[3]}}</td>
+						<td>{{row[4]}}</td>
+						<td>{{row[5]}}</td> 
+					</tr>
+					{% endfor %}
+				</tbody>
 				</table>
 			</div>
 		</div>
