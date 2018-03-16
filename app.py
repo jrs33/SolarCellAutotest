@@ -4,6 +4,7 @@ from flask.json import jsonify
 from solarCellTestDriver import runEDSTest
 from TestingConstants import TestingConstants
 from DataTransportFactory import DataTransportFactory
+from jinja2 import Environment, PackageLoader, select_autoescape
 
 app = Flask("SolarBytes")
 constants = TestingConstants()
@@ -18,16 +19,12 @@ def testEDS(cellSelect):
     ratio = runEDSTest(cellSelect)
     return "Ratio for test on cell "+ constants.PIN_TO_CELL_MAP[cellSelect]  + " is " + str(ratio)
 
-@app.route('/testInsert')
-def testInsert():
-    dataTrans.transportToDB()
-    return "INSERTED DATA!"
-
 @app.route('/data/table/<limit>')
 def tableQuery(limit):
     if(limit == ''):
         return dataTrans.transportFromDB(10)
-    return jsonify({'rows': dataTrans.transportFromDB(limit)})
+    results = dataTrans.transportFromDB(limit)
+    return render_template('data.html', results=results)
 
 @app.route('/data/filter/<op>/<col>/<val>')
 def filterQuery(op,

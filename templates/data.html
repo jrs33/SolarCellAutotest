@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+	<head>
+		<title>SolarBytes</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	</head>
+	<body style="background-color: #3498db">
+		<div class="container">
+			<div class="row" align="center" style="margin-top:20px">
+				<h1 style="color: #ffffff">SolarBytes Data Visualizer</h1>
+			</div>
+			<hr>
+			<div class="row" align="center">
+				<table style="border: 1px solid black">
+				<tr>
+					<th>TestDate</th>
+					<th>TestTime</th>
+					<th>Cell</th>
+					<th>Ratio</th>
+					<th>Temperature</th>
+					<th>Humidity</th>
+				</tr>
+				{% for row in results %}
+				<tr align="center">
+					<td>{{row[0]}}</td>
+					<td>{{row[1]}}</td>
+					<td>{{row[2]}}</td>
+					<td>{{row[3]}}</td>
+					<td>{{row[4]}}</td>
+					<td>{{row[5]}}</td> 
+				</tr>
+				{% endfor %}
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
