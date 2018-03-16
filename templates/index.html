@@ -1,50 +1,27 @@
 <!DOCTYPE html>
 	<head>
 		<title>SolarBytes</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	</head>
-	<body>
-		<h1>SolarBytes EDS Testing Screen</h1>
-		<hr>
-		<div id="content"></div>
-		<form action="/testEDS/12" method="get">
-			<input type="submit" value="Test Cell 1" />
-		</form>
-		<form action="/testEDS/16" method="get">
-			<input type="submit" value="Test Cell 2" />
-		</form>
-		<form action="/testEDS/20" method="get">
-			<input type="submit" value="Test Cell 3" />
-		</form>
-		<form action="/testEDS/21" method="get">
-			<input type="submit" value="Test Cell 4" />
-		</form>
-		<form action="/testEDS/6" method="get">
-			<input type="submit" value="Test Cell 5" />
-		</form>
-		<form action="/testEDS/13" method="get">
-			<input type="submit" value="Test Cell 6" />
-		</form>
-		<form action="/testEDS/19" method="get">
-			<input type="submit" value="Test Cell 7" />
-		</form>
-		<form action="/testEDS/26" method="get">
-			<input type="submit" value="Test Cell 8" />
-		</form>
-		<!-- scripts -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.min.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
-		<script type="text/jsx">
-			var solarGreet = React.createClass({
-				render: function() {
-					return (<h2>SolarBytes</h2>);
-				}
-			});
-
-			ReactDOM.render(
-				React.createElement(solarGreet, null),
-				document.getElementById('content')
-			);
-		</script>
+	<body style="background-color: #f1c40f">
+		<div class="container">
+			<div class="row" align="center">
+				<h1 style="color: #ffffff">SolarBytes EDS Testing Screen</h1>
+			</div>
+			<div class="row" align="center" style="margin-top:20px">
+				<a href="/testEDS/12" class="btn btn-info" role="button">Test 1</a>
+				<a href="/testEDS/16" class="btn btn-info" role="button">Test 2</a>
+				<a href="/testEDS/20" class="btn btn-info" role="button">Test 3</a>
+				<a href="/testEDS/21" class="btn btn-info" role="button">Test 4</a>
+				<a href="/testEDS/6" class="btn btn-info" role="button">Test 5</a>
+				<a href="/testEDS/13" class="btn btn-info" role="button">Test 6</a>
+				<a href="/testEDS/19" class="btn btn-info" role="button">Test 7</a>
+				<a href="/testEDS/26" class="btn btn-info" role="button">Test 8</a>
+			</div>
+			<div class="row" align="center">
+				<a href="/data/table/10" class="btn btn-info" role="button" style="margin-top:20px">See Data</a>
+			</div>
+		</div>
 	</body>
 </html>
