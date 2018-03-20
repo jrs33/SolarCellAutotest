@@ -38,15 +38,15 @@ def filterQuery():
     results = dataTrans.transportFromDBFiltered(col,op,val,10)
     return render_template('data.html', results=results)
 
-@app.route('/data/aggregate/<op>/<col>')
-def aggregateQuery(op,
-                   col):
-    if(op == '' or col == ''):
-        return null
-    
-    if(request.args.get('limit')): # query parameter
-        lim = request.args.get('limit')
-        return dataTrans.transportFromDBAggregated(col,op,lim)
-    return jsonify({'rows': dataTrans.transportFromDBAggregated(col,op,10)})
+@app.route('/data/aggregate', methods=['POST'])
+def aggregateQuery():
+    col = request.form.get('agg_column')
+    op = request.form.get('agg_operation')
+
+    if(col == "" or op == ""):
+        return ""
+
+    result = dataTrans.transportFromDBAggregated(col,op)
+    return result
 
 app.run(debug=True, host='0.0.0.0')

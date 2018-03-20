@@ -107,16 +107,30 @@ class DataTransportFactory(object):
                                   operation):
         try:
             db = self.getDatabase()
+            colArray = ["TestDate", "TestTime", "Cell", "Ratio", "Temp", "Humidity"]
             sqlCursor = self.getDatabaseTunnel()
 
-            queryString = 'SELECT ' + str(operation) + '(' + str(column) + ') FROM solarTests'
+            queryString = 'SELECT * FROM solarTests'
             print(queryString)
             results = list()
             for row in sqlCursor.execute(queryString):
                 results.append(row)
 
+            if(operation == "AVG"):
+                result = self.getAverage(results, colArray.index(column))
+
+            if(operation == "MIN"):
+                result = self.getMinimum(results, colArray.index(column))
+
+            if(operation == "MAX"):
+                result = self.getMaximum(results, colArray.index(column))
+
+            if(operation == "SUM"):
+                result = self.getSum(results, colArray.index(column))
+
+            print(result)
             db.close()
-            return results
+            return str(result)
         except Exception as error:
             raise error
 
@@ -134,6 +148,36 @@ class DataTransportFactory(object):
             return db
         except Exception as error:
             raise error
-                        
+
+    def getAverage(self, listRows, index):
+        sum = 0
+        for row in listRows:
+            sum = sum + row[index]
+
+        average = sum/len(listRows)
+        return average
+
+    def getMinimum(self, listRows, index):
+        numArray = list()
+        for row in listRows:
+            numArray.append(row[index])
+
+        minimum = min(numArray)
+        return minimum
+
+    def getMaximum(self, listRows, index):
+        numArray = list()
+        for row in listRows:
+            numArray.append(row[index])
+
+        maximum = max(numArray)
+        return maximum
+
+    def getSum(self, listRows, index):
+        sum = 0
+        for row in listRows:
+            sum = sum + row[index]
+
+        return sum
                         
                         

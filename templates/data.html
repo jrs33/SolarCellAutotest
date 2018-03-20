@@ -67,6 +67,39 @@
 					</form>
 					<br>
 				</div>
+				</div>
+				<br>
+				<div class="row" align="center">
+				<div class="col-sm-6" style="background-color:#ffffff">
+					<h3>Aggregation Criteria</h3>
+					<br>
+					<form class="form-inline" method="POST" action="{{ url_for('aggregateQuery') }}">
+						<div class="form-group">
+							<div class="input-group">
+								<select name="agg_column">
+									<option value="">---</option>
+									<option value="TestDate">TestDate</option>
+									<option value="TestTime">TestTime</option>
+									<option value="Cell">Cell</option>
+									<option value="Ratio">Ratio</option>
+									<option value="Temperature">Temperature</option>
+									<option value="Humidity">Humidity</option>
+								</select>
+								<select name="agg_operation">
+									<option value="">---</option>
+									<option value="AVG">Average</option>
+									<option value="MIN">Minimum</option>
+									<option value="MAX">Maximum</option>
+									<option value="SUM">Sum</option>
+								</select>
+							</div>
+							<br>
+							<button type="submit" class="btn btn-default">Aggregate Data</button>
+						</div>
+					</form>
+					<br>
+				</div>
+				</div>
 			</div>		
 		</div>
 	</body>
