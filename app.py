@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for, request
 from flask.json import jsonify
 from solarCellTestDriver import runEDSTest
 from TestingConstants import TestingConstants
@@ -26,17 +26,17 @@ def tableQuery(limit):
     results = dataTrans.transportFromDB(limit)
     return render_template('data.html', results=results)
 
-@app.route('/data/filter/<op>/<col>/<val>')
-def filterQuery(op,
-                col,
-                val):
-    if(op == '' or col == '' or val == ''):
-        return null
+@app.route('/data/filter', methods=['POST'])
+def filterQuery():
+    col = request.form.get('column')
+    op = request.form.get('operation')
+    val = request.form.get('filter')
+
+    if(col == "" or op == "" or val == ""):
+        return tableQuery(10)
     
-    '''if(request.args.get('limit')): # query parameter
-        lim = request.args.get('limit')
-        return dataTrans.transportFromDBFiltered(col,op,val,lim)'''
-    return jsonify({'rows': dataTrans.transportFromDBFiltered(col,op,val,10)})
+    results = dataTrans.transportFromDBFiltered(col,op,val,10)
+    return render_template('data.html', results=results)
 
 @app.route('/data/aggregate/<op>/<col>')
 def aggregateQuery(op,

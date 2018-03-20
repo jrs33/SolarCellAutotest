@@ -15,8 +15,6 @@ class DataTransportFactory(object):
                  val):
         self.val = val
         self.constants = TestingConstants()
-        self.operations = ['IS','IS_NOT','GREATER','LESS']
-        self.rows = {'ratio':float,'cellNumber':int,'date':str,'time':float,'temperature':float,'humidity':float}
 
     '''
     Transports test data to local mounted USB
@@ -47,7 +45,6 @@ class DataTransportFactory(object):
     '''
     Transports test data to sql database
     '''
-    # TODO: ADD IN TYPE CHECKS AFTER FRONT END FINALIZED
     def transportToDB(self,
                       ratio=0,
                       cellNumber=0,
