@@ -2,9 +2,8 @@ import time
 import RPi.GPIO as GPIO
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
-import time
-
-from datetime import *
+import dht11
+import datetime
 
 from GPIOControlFactory import *
 from ADCControlFactory import *
@@ -12,7 +11,7 @@ from DataTransportFactory import *
 from EDSControlFactory import *
 
 '''
-This is an abstracted function to run the logic
+This is a function that contains the logic
 for our EDS tests. The tests go as follows:
 
 1) Run test on selected cell without the EDS running
@@ -21,7 +20,7 @@ for our EDS tests. The tests go as follows:
 4) Turn off the EDS
 5) Repeat 1 & 2
 6) Compare the ratios of before and after cleaning and
-store data locally and remotely 
+store various data locally and remotely 
 '''
 def runEDSTest(selectedCell):
     gpio = GPIOControlFactory(0)
@@ -54,8 +53,24 @@ def runEDSTest(selectedCell):
     ratio = 0
     if averagePreClean != 0:
         ratio = averagePostClean/averagePreClean
-    transporter.transportToUSB(ratio,selectedCell,str(datetime.now()))
-    transporter.transportToBufferFile(ratio,selectedCell,str(datetime.now()))
-    transporter.transportToDB(ratio,selectedCell,str(date.today()),str(time.time()))
+    tempHumidList = getTemperatureAndHumidity()
+    temperature = tempHumidList[0]
+    humidity = tempHumidList[1]
+
+    transporter.transportToUSB(ratio,selectedCell,str(datetime.now()),temperature,humidity)
+    transporter.transportToBufferFile(ratio,selectedCell,str(datetime.now()),temperature,humidity)
+    transporter.transportToDB(ratio,selectedCell,str(date.today()),str(time.time()),temperature,humidity)
 
     return ratio
+
+'''
+This function returns 
+'''
+def getTemperatureAndHumidity():
+    instance = dht11.DHT11(pin=17)
+    result = instance.read()
+    tempHumidList = []
+    if result.is_valid():
+        tempHumidList.append(result.temperature)
+        tempHumidList.append(result.humidity)
+    return tempHumidList
