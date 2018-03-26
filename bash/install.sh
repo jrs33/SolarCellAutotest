@@ -21,8 +21,19 @@ function install_package() {
 }
 
 # calls to install various packages
+sudo $BUILD_SYSTEM update
 install_package $WEB_DEV
 install_package $GUI
 install_package $RPI_GPIO
 install_package $DB
 install_package $XTERM
+sudo $BUILD_SYSTEM install git build-essential python-pip python-dev python-smbus
+git clone https://github.com/adafruit/Adafruit_Python_MCP3008.git
+cd Adafruit_Python_MCP3008
+sudo python setup.py install
+git clone https://github.com/adafruit/Adafruit_Python_GPIO.git
+cd Adafruit_Python_GPIO
+sudo python setup.py install
+git clone https://github.com/szazo/DHT11_Python.git
+cd DHT11_Python
+sudo python __init__.py install
