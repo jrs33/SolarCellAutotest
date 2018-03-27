@@ -12,7 +12,7 @@ function check_db_exists() {
 }
 
 function create_database() {
-	if [ check_db_exists == 0 ]; then
+	if [ check_db_exists == 1 ]; then
 		touch $SQLITE_FILE
 		echo "database created"
 	fi

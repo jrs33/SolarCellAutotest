@@ -12,7 +12,6 @@ function install_package() {
 	local return_val=1
 	type $1 >/dev/null 2>&1 || { local return_val=0; }
 	if [ return_val == 1 ]; then
-		$BUILD_SYSTEM update
 		$BUILD_SYSTEM install $1 -y
 		echo "installed $1"
 	else
