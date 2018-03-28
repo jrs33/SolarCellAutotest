@@ -53,9 +53,9 @@ def runEDSTest(selectedCell):
     ratio = 0
     if averagePreClean != 0:
         ratio = averagePostClean/averagePreClean
- #   tempHumidList = getTemperatureAndHumidity()
- #   temperature = tempHumidList[0]
- #   humidity = tempHumidList[1]
+    tempHumidList = getTemperatureAndHumidity()
+    temperature = tempHumidList[0]
+    humidity = tempHumidList[1]
 
     transporter.transportToUSB(ratio,selectedCell,str(datetime.now()))
     transporter.transportToBufferFile(ratio,selectedCell,str(datetime.now()))
@@ -66,11 +66,11 @@ def runEDSTest(selectedCell):
 '''
 This function returns 
 '''
-#def getTemperatureAndHumidity():
-    #instance = dht11.DHT11(pin=17)
-    #result = instance.read()
-    #tempHumidList = []
-    #if result.is_valid():
-    #    tempHumidList.append(result.temperature)
-    #    tempHumidList.append(result.humidity)
-    #return tempHumidList
+def getTemperatureAndHumidity():
+    instance = dht11.DHT11(pin=17)
+    result = instance.read()
+    tempHumidList = []
+    if result.is_valid():
+        tempHumidList.append(result.temperature)
+        tempHumidList.append(result.humidity)
+    return tempHumidList

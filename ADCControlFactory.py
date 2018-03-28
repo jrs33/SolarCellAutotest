@@ -40,16 +40,16 @@ class ADCControlFactory(object):
         for measurementNumber in range(25):
             if(measurementNumber > 4):
                 values = [0]*1
-                values[0] = (mcp.read_adc(0) * (3.3/1023))/1000
+                values[0] = (mcp.read_adc(1) * (3.3/1023))/1000
 
-                try:
-                    if(self.isDisconnected(self.previousValue, values[0])):
-                       raise ValueError('ERROR: TEST HARDWARE DISCONNECTED')
-                    if(self.isCloudCovered(self.previousValue, values[0])):
-                       raise ValueError('ERROR: CLOUD COVERAGE DURING TEST')
-                except ValueError as error:
-                       print(repr(error))
-                       raise error
+                #try:
+                   # if(self.isDisconnected(self.previousValue, values[0])):
+                      # raise ValueError('ERROR: TEST HARDWARE DISCONNECTED')
+                  #  if(self.isCloudCovered(self.previousValue, values[0])):
+                   #    raise ValueError('ERROR: CLOUD COVERAGE DURING TEST')
+                #except ValueError as error:
+                 #      print(repr(error))
+                  #     raise error
                 
                 total = total + values[0]
                 self.previousValue = values[0]
