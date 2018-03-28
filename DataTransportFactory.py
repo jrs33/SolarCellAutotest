@@ -55,7 +55,7 @@ class DataTransportFactory(object):
         try:
             db = self.getDatabase()
             sqlCursor = self.getDatabaseTunnel()
-            
+
             test = [(date,time,cellNumber,ratio,temperature,humidity),]
             sqlCursor.executemany('INSERT INTO solarTests VALUES (?,?,?,?,?,?)',test)
 
@@ -138,25 +138,25 @@ class DataTransportFactory(object):
                                            filtCol,
                                            filtOp,
                                            filtVal,
-                                           filtLimit
+                                           filtLimit,
                                            aggCol,
                                            aggOp):
-    try:
-        colArray = ["TestDate", "TestTime", "Cell", "Ratio", "Temp", "Humidity"]
-        filteredResults = self.transportFromDBFiltered(filtCol,filtOp,filtVal,filtLimit)
-        if(aggOp == "AVG"):
-            result = self.getAverage(filteredResults, colArray.index(column))
-        if(aggOp == "MIN"):
-            result = self.getMinimum(filteredResults, colArray.index(column))
-        if(aggOp == "MAX"):
-            result = self.getMaximum(filteredResults, colArray.index(column))
-        if(aggOp == "SUM"):
-            result = self.getSum(filteredResults, colArray.index(column))
+        try:
+            colArray = ["TestDate", "TestTime", "Cell", "Ratio", "Temp", "Humidity"]
+            filteredResults = self.transportFromDBFiltered(filtCol,filtOp,filtVal,filtLimit)
+            if(aggOp == "AVG"):
+                result = self.getAverage(filteredResults, colArray.index(column))
+            if(aggOp == "MIN"):
+                result = self.getMinimum(filteredResults, colArray.index(column))
+            if(aggOp == "MAX"):
+                result = self.getMaximum(filteredResults, colArray.index(column))
+            if(aggOp == "SUM"):
+                result = self.getSum(filteredResults, colArray.index(column))
 
-        print(result)
-        return str(result)
-    except Exception as error:
-        raise error
+            print(result)
+            return str(result)
+        except Exception as error:
+            raise error
 
     def getDatabaseTunnel(self):
         try:
