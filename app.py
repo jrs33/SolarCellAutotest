@@ -43,7 +43,7 @@ def filterQuery():
 
     if(col == "" or op == "" or val == ""):
         return tableQuery(10)
-    
+
     results = dataTrans.transportFromDBFiltered(col,op,val,10)
     return render_template('data.html', results=results)
 
@@ -57,6 +57,18 @@ def aggregateQuery():
         return ""
 
     result = dataTrans.transportFromDBAggregated(col,op)
+    return result
+
+@app.route('/data/aggFilter', methods=['POST'])
+@requiresAuth
+def filterAndAggregateQuery():
+    aggCol = request.form.get('agg_column')
+    opCol = request.form.get('agg_operation')
+    filtCol = request.form.get('filt_column')
+    filtOp = request.form.get('filt_operation')
+    filtVal = request.form.get('filt_val')
+
+    result = dataTrans.transportFromDBFilterThenAggregate(self,filtCol,filtOp,filtVal,10,aggCol,opCol)
     return result
 
 app.run(debug=True, host='0.0.0.0')

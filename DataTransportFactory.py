@@ -134,6 +134,30 @@ class DataTransportFactory(object):
         except Exception as error:
             raise error
 
+    def transportFromDBFilterThenAggregate(self,
+                                           filtCol,
+                                           filtOp,
+                                           filtVal,
+                                           filtLimit
+                                           aggCol,
+                                           aggOp):
+    try:
+        colArray = ["TestDate", "TestTime", "Cell", "Ratio", "Temp", "Humidity"]
+        filteredResults = self.transportFromDBFiltered(filtCol,filtOp,filtVal,filtLimit)
+        if(aggOp == "AVG"):
+            result = self.getAverage(filteredResults, colArray.index(column))
+        if(aggOp == "MIN"):
+            result = self.getMinimum(filteredResults, colArray.index(column))
+        if(aggOp == "MAX"):
+            result = self.getMaximum(filteredResults, colArray.index(column))
+        if(aggOp == "SUM"):
+            result = self.getSum(filteredResults, colArray.index(column))
+
+        print(result)
+        return str(result)
+    except Exception as error:
+        raise error
+
     def getDatabaseTunnel(self):
         try:
             db = self.getDatabase()
