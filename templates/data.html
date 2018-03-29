@@ -23,38 +23,10 @@
                 </nav>
 		<div class="container">
 			<div class="row" align="center" style="margin-top:20px">
-				<h1 style="color:#ffffff">SolarBytes Data Visualizer</h1>
+				<h1>SolarBytes Data Visualizer</h1>
 			</div>
 			<div class="row" align="center" style="margin-top:20px">
-				<div class="col">
-					<table class="table" style="background-color: #ffffff">
-						<thead class="thead-dark">
-							<tr>
-								<th scope="col">TestDate</th>
-								<th scope="col">TestTime</th>
-								<th scope="col">Cell</th>
-								<th scope="col">Ratio</th>
-								<th scope="col">Temperature</th>
-								<th scope="col">Humidity</th>
-							</tr>
-						</thead>
-						<tbody>
-							{% for row in results %}
-							<tr>
-								<td>{{row[0]}}</td>
-								<td>{{row[1]}}</td>
-								<td>{{row[2]}}</td>
-								<td>{{row[3]}}</td>
-								<td>{{row[4]}}</td>
-								<td>{{row[5]}}</td> 
-							</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
-			</div>
-			<div class="row" align="center" style="margin-top:20px">
-				<div class="col-sm-6" style="background-color:#ffffff">
+				<div class="col-sm-6" style="background-color:#ffffff;height:200px">
 					<h3>Filter Criteria</h3>
 					<br>
 					<form class="form-inline" method="POST" action="{{ url_for('filterQuery') }}">
@@ -84,7 +56,8 @@
 					</form>
 					<br>
 				</div>
-				<div class="col-sm-6" style="background-color:#ffffff">
+				<div class="col-sm-1"></div>
+				<div class="col-sm-5" style="background-color:#ffffff;height:200px">
 					<h3>Aggregation Criteria</h3>
 					<br>
 					<form class="form-inline" method="POST" action="{{ url_for('aggregateQuery') }}">
@@ -115,7 +88,7 @@
 				</div>
 			</div>
 			<div class="row" align="center" style="margin-top:20px">
-				<div class="col-sm-6" style="background-color:#ffffff">
+				<div class="col-sm-6" style="background-color:#ffffff;height:200px">
 					<h3>Filter and Aggregate</h3>
 					<br>
 					<form class="form-inline" method="POST" action="{{ url_for('filterAndAggregateQuery') }}">
@@ -160,6 +133,41 @@
 						</div>
 					</form>
 					<br>
+				</div>
+				<div class="col-sm-1"></div>
+				<div class="col-sm-5" style="background-color:#ffffff;height:200px">
+					<h3>Metrics</h3>
+					<br>
+					<h6>Total Rows: <span>{{ tableSize }}</span></h6>
+					<h6>Agg. Result: <span>{{ aggResult }}</span</h6>
+				</div>
+			</div>
+			<div class="row" align="center" style="margin-top:20px">
+				<div class="col">
+					<table class="table" style="background-color: #ffffff">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">TestDate</th>
+								<th scope="col">TestTime</th>
+								<th scope="col">Cell</th>
+								<th scope="col">Ratio</th>
+								<th scope="col">Temperature</th>
+								<th scope="col">Humidity</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for row in results %}
+							<tr>
+								<td>{{row[0]}}</td>
+								<td>{{row[1]}}</td>
+								<td>{{row[2]}}</td>
+								<td>{{row[3]}}</td>
+								<td>{{row[4]}}</td>
+								<td>{{row[5]}}</td> 
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
 				</div>
 			</div>		
 		</div>
