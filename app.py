@@ -26,9 +26,15 @@ def testEDS(cellSelect):
     ratio = runEDSTest(cellSelect)
     return "Ratio for test on cell "+ constants.PIN_TO_CELL_MAP[cellSelect]  + " is " + str(ratio)
 
+@app.route('/data/table')
+@requiresAuth
+def tableQuery():
+    results = dataTrans.transportFromDB(-1)
+    return render_template('data.html', results=results)
+
 @app.route('/data/table/<limit>')
 @requiresAuth
-def tableQuery(limit):
+def tableQueryLimited():
     if(limit == ''):
         return dataTrans.transportFromDB(10)
     results = dataTrans.transportFromDB(limit)

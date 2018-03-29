@@ -71,8 +71,12 @@ class DataTransportFactory(object):
             db = self.getDatabase()
             sqlCursor = self.getDatabaseTunnel()
 
-            queryString = 'SELECT * FROM solarTests LIMIT ' + str(limit) + ';'
+            if(limit >= 0):
+                queryString = 'SELECT * FROM solarTests LIMIT ' + str(limit) + ';'
+            else:
+                queryString = 'SELECT * FROM solarTests;'
             print(queryString)
+
             results = list()
             for row in sqlCursor.execute(queryString):
                 results.append(row)
