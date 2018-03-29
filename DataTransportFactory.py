@@ -145,13 +145,13 @@ class DataTransportFactory(object):
             colArray = ["TestDate", "TestTime", "Cell", "Ratio", "Temp", "Humidity"]
             filteredResults = self.transportFromDBFiltered(filtCol,filtOp,filtVal,filtLimit)
             if(aggOp == "AVG"):
-                result = self.getAverage(filteredResults, colArray.index(column))
+                result = self.getAverage(filteredResults, colArray.index(aggCol))
             if(aggOp == "MIN"):
-                result = self.getMinimum(filteredResults, colArray.index(column))
+                result = self.getMinimum(filteredResults, colArray.index(aggCol))
             if(aggOp == "MAX"):
-                result = self.getMaximum(filteredResults, colArray.index(column))
+                result = self.getMaximum(filteredResults, colArray.index(aggCol))
             if(aggOp == "SUM"):
-                result = self.getSum(filteredResults, colArray.index(column))
+                result = self.getSum(filteredResults, colArray.index(aggCol))
 
             print(result)
             return str(result)
@@ -174,6 +174,9 @@ class DataTransportFactory(object):
             raise error
 
     def getAverage(self, listRows, index):
+        if(len(listRows) == 0):
+            return 0
+
         sum = 0
         for row in listRows:
             sum = sum + row[index]
@@ -203,5 +206,3 @@ class DataTransportFactory(object):
             sum = sum + row[index]
 
         return sum
-                        
-                        

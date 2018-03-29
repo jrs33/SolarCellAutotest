@@ -68,7 +68,7 @@ def filterAndAggregateQuery():
     filtOp = request.form.get('filt_operation')
     filtVal = request.form.get('filt_val')
 
-    result = dataTrans.transportFromDBFilterThenAggregate(self,filtCol,filtOp,filtVal,10,aggCol,opCol)
+    result = dataTrans.transportFromDBFilterThenAggregate(filtCol,filtOp,filtVal,10,aggCol,opCol)
     return result
 
 app.run(debug=True, host='0.0.0.0')
