@@ -33,41 +33,48 @@ class ADCControlFactory(object):
         MOSI = 24
         CS   = 25
         mcp = Adafruit_MCP3008.MCP3008(clk=CLK, cs=CS, miso=MISO, mosi=MOSI)
+        ADC_CHANNEL = 1
 
         # Read all the ADC channel values in a list.
         total = 0
         print("Interpreting data...")
-        for measurementNumber in range(25):
-            if(measurementNumber > 4):
+        initialMeasurement = True
+        for measurementNumber in range(10021):
+            # Allows for measurements to stabilize using count
+            if(measurementNumber > 10000):
                 values = [0]*1
-                values[0] = (mcp.read_adc(1) * (3.3/1023))/1000
+                values[0] = (mcp.read_adc(ADC_CHANNEL) * (3.3/1023))/1000
+                print(values[0])
 
-                #try:
-                   # if(self.isDisconnected(self.previousValue, values[0])):
-                      # raise ValueError('ERROR: TEST HARDWARE DISCONNECTED')
-                  #  if(self.isCloudCovered(self.previousValue, values[0])):
-                   #    raise ValueError('ERROR: CLOUD COVERAGE DURING TEST')
-                #except ValueError as error:
-                 #      print(repr(error))
-                  #     raise error
-                
+                if(initialMeasurement):
+                    self.previousValue = values[0]
+
+                try:
+                    if(self.isDisconnected(self.previousValue, values[0])):
+                        raise ValueError('ERROR: TEST HARDWARE DISCONNECTED')
+                    if(self.isCloudCovered(self.previousValue, values[0])):
+                        raise ValueError('ERROR: CLOUD COVERAGE DURING TEST')
+                except (ValueError) as error:
+                    print(repr(error))
+                    raise error
+
                 total = total + values[0]
                 self.previousValue = values[0]
-            
+                initialMeasurement = False
+
                 time.sleep(0.5)
-                print(values[0])
 
         return total/20.0
 
     def isDisconnected(self, oldValue, newValue):
-        if(oldValue == 0 or newValue == 0):
+        if(newValue == 0):
             return True
         return False
 
     def isCloudCovered(self, oldValue, newValue):
+        print("OLD: " + str(oldValue) + " NEW: " + str(newValue))
         if(oldValue == newValue):
             return False
         if((abs(oldValue - newValue)/oldValue)*100 > 10):
             return True
         return False
-            
