@@ -1,11 +1,12 @@
 #!/usr/bin/env python
-from flask import Flask, render_template, url_for, request, Response
+from flask import Flask, render_template, url_for, request, Response, redirect
 from flask.json import jsonify
 from solarCellTestDriver import runEDSTest
 from TestingConstants import TestingConstants
 from DataTransportFactory import DataTransportFactory
 from jinja2 import Environment, PackageLoader
 from auth import *
+import time
 
 app = Flask("SolarBytes")
 constants = TestingConstants()
@@ -18,19 +19,20 @@ def login():
 @app.route('/testEDS', methods=['GET','POST'])
 @requiresAuth
 def index():
-    return render_template('index.html')
+    return render_template('index.html', testStatus="No Test Running")
 
 @app.route('/testEDS/<int:cellSelect>')
 @requiresAuth
 def testEDS(cellSelect):
     ratio = runEDSTest(cellSelect)
-    return "Ratio for test on cell "+ constants.PIN_TO_CELL_MAP[cellSelect]  + " is " + str(ratio)
+    return render_template('index.html', testStatus="Result: "+str(ratio))
 
 @app.route('/data/table')
 @requiresAuth
 def tableQuery():
     results = dataTrans.transportFromDB(-1)
-    return render_template('data.html', results=results)
+    count = dataTrans.getTotalTestCount()
+    return render_template('data.html', results=results, tableSize=len(results))
 
 @app.route('/data/table/<limit>')
 @requiresAuth
@@ -51,7 +53,7 @@ def filterQuery():
         return tableQuery(10)
 
     results = dataTrans.transportFromDBFiltered(col,op,val,10)
-    return render_template('data.html', results=results)
+    return render_template('data.html', results=results, tableSize=len(results))
 
 @app.route('/data/aggregate', methods=['POST'])
 @requiresAuth
@@ -63,7 +65,8 @@ def aggregateQuery():
         return ""
 
     result = dataTrans.transportFromDBAggregated(col,op)
-    return result
+    results = dataTrans.transportFromDB(-1)
+    return render_template('data.html', results=results, tableSize=len(results), aggResult=result)
 
 @app.route('/data/aggFilter', methods=['POST'])
 @requiresAuth

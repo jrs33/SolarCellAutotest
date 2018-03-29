@@ -14,7 +14,7 @@
 				</div>
 				<div class="collapse navbar-collapse" id="solarNav">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Test</a></li>
+						<li class="active"><a href="/testEDS">Test</a></li>
 						<li><a href="/data/table">Data</a></li>
 					</ul>
 				</div>
@@ -26,10 +26,22 @@
 			</div>
 			<hr>
 			<div class="row" align="center" style="margin-top:20px">
-				<a href="/testEDS/12" class="btn btn-info" role="button">Test 1</a>
-				<a href="/testEDS/16" class="btn btn-info" role="button">Test 2</a>
-				<a href="/testEDS/20" class="btn btn-info" role="button">Test 3</a>
-				<a href="/testEDS/21" class="btn btn-info" role="button">Test 4</a>
+				<div class="col-sm-1"></div>
+				<div class="col-sm-4" style="background-color:#ffffff;height:200px">
+					<h3>Initiate Test</h3>
+					<hr>
+					<a href="/testEDS/12" class="btn btn-info" role="button">Test 1</a>
+					<a href="/testEDS/16" class="btn btn-info" role="button">Test 2</a>
+					<a href="/testEDS/20" class="btn btn-info" role="button">Test 3</a>
+					<a href="/testEDS/21" class="btn btn-info" role="button">Test 4</a>
+				</div>
+				<div class="col-sm-2"></div>
+				<div class="col-sm-4" style="background-color:#ffffff;height:200px">
+					<h3>Test Status</h3>
+					<hr>
+					<h4><b>{{ testStatus }}</b></h4>
+				</div>
+				<div class="col-sm-1"></div>
 			</div>
 		</div>
 	</body>

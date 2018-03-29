@@ -162,6 +162,16 @@ class DataTransportFactory(object):
         except Exception as error:
             raise error
 
+    def getTotalTestCount(self):
+        try:
+            sqlCursor = self.getDatabaseTunnel()
+            rowCount = 0
+            for row in sqlCursor.execute("SELECT * FROM solarTests"):
+                rowCount = rowCount + 1
+            return rowCount
+        except Exception as error:
+            raise error
+
     def getDatabaseTunnel(self):
         try:
             db = self.getDatabase()

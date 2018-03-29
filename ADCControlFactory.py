@@ -53,7 +53,7 @@ class ADCControlFactory(object):
                     if(self.isDisconnected(self.previousValue, values[0])):
                         raise ValueError('ERROR: TEST HARDWARE DISCONNECTED')
                     if(self.isCloudCovered(self.previousValue, values[0])):
-                        raise ValueError('ERROR: CLOUD COVERAGE DURING TEST')
+                        raise ValueError('SUSPENDED TEST: CLOUD COVERAGE DURING TEST')
                 except (ValueError) as error:
                     print(repr(error))
                     raise error
