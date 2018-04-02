@@ -33,6 +33,3 @@ sudo python setup.py install
 git clone https://github.com/adafruit/Adafruit_Python_GPIO.git
 cd Adafruit_Python_GPIO
 sudo python setup.py install
-git clone https://github.com/szazo/DHT11_Python.git
-cd DHT11_Python
-sudo python __init__.py install
