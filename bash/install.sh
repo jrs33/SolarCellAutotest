@@ -1,5 +1,5 @@
 #!/bin/bash
-BUILD_SYSTEM="apt-get"
+BUILD_SYSTEM="pip3"
 WEB_DEV="Flask"
 GUI="tkinter"
 RPI_GPIO="RPi.GPIO"
@@ -12,7 +12,7 @@ function install_package() {
 	local return_val=1
 	type $1 >/dev/null 2>&1 || { local return_val=0; }
 	if [ return_val == 1 ]; then
-		$BUILD_SYSTEM install $1 -y
+		$BUILD_SYSTEM install $1
 		echo "installed $1"
 	else
 		echo "$1 already installed or could not install"
@@ -20,6 +20,7 @@ function install_package() {
 }
 
 # calls to install various packages
+sudo apt-get install python3-pip
 sudo $BUILD_SYSTEM update
 install_package $WEB_DEV
 install_package $GUI
