@@ -2,7 +2,7 @@ import time
 import RPi.GPIO as GPIO
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
-#import dht11
+import dht11
 import datetime
 
 from GPIOControlFactory import *
@@ -53,24 +53,28 @@ def runEDSTest(selectedCell):
     ratio = 0
     if averagePreClean != 0:
         ratio = averagePostClean/averagePreClean
-    tempHumidList = getTemperatureAndHumidity()
-    temperature = tempHumidList[0]
-    humidity = tempHumidList[1]
 
-    transporter.transportToUSB(ratio,selectedCell,str(datetime.now()))
-    transporter.transportToBufferFile(ratio,selectedCell,str(datetime.now()))
-    transporter.transportToDB(ratio,selectedCell,str(date.today()),str(time.time()))
+    dhtResult = getTemperatureAndHumidity()
 
+    if dhtResult is not None:
+        print("CUNT")
+        temperature = dhtResult.temperature
+        humidity = dhtResult.humidity
+
+        #transporter.transportToUSB(ratio,selectedCell,str(datetime.datetime.now()))
+        #transporter.transportToBufferFile(ratio,selectedCell,str(datetime.datetime.now()))
+
+    transporter.transportToDB()
     return ratio
 
 '''
 This function returns 
 '''
 def getTemperatureAndHumidity():
+    GPIO.setmode(GPIO.BCM)
     instance = dht11.DHT11(pin=17)
     result = instance.read()
-    tempHumidList = []
+
+    print(result)
     if result.is_valid():
-        tempHumidList.append(result.temperature)
-        tempHumidList.append(result.humidity)
-    return tempHumidList
+        return result

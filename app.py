@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 from flask import Flask, render_template, url_for, request, Response, redirect
 from flask.json import jsonify
 from solarCellTestDriver import runEDSTest

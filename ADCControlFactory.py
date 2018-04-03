@@ -72,9 +72,8 @@ class ADCControlFactory(object):
         return False
 
     def isCloudCovered(self, oldValue, newValue):
-        print("OLD: " + str(oldValue) + " NEW: " + str(newValue))
         if(oldValue == newValue):
             return False
-        if((abs(oldValue - newValue)/oldValue)*100 > 10):
+        if((abs(oldValue - newValue)/oldValue)*100 > 20):
             return True
         return False

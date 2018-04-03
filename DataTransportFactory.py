@@ -57,12 +57,11 @@ class DataTransportFactory(object):
             sqlCursor = self.getDatabaseTunnel()
 
             test = [(date,time,cellNumber,ratio,temperature,humidity),]
-            sqlCursor.executemany('INSERT INTO solarTests VALUES (?,?,?,?,?,?)',test)
-
+            sqlCursor.executemany('INSERT INTO solarTests VALUES(?,?,?,?,?,?);',test)
             db.commit()
             db.close()
             return
-        except Exception as error:
+        except sql.Error as error:
             raise error
 
     def transportFromDB(self,
@@ -75,7 +74,6 @@ class DataTransportFactory(object):
                 queryString = 'SELECT * FROM solarTests LIMIT ' + str(limit) + ';'
             else:
                 queryString = 'SELECT * FROM solarTests;'
-            print(queryString)
 
             results = list()
             for row in sqlCursor.execute(queryString):
@@ -96,7 +94,6 @@ class DataTransportFactory(object):
             sqlCursor = self.getDatabaseTunnel()
 
             queryString = 'SELECT * FROM solarTests WHERE ' + str(column) + ' ' + str(operation) + ' ' + str(value) + ' LIMIT ' + str(limit) + ';'
-            print(queryString)
             results = list()
             for row in sqlCursor.execute(queryString):
                 results.append(row)
@@ -115,7 +112,6 @@ class DataTransportFactory(object):
             sqlCursor = self.getDatabaseTunnel()
 
             queryString = 'SELECT * FROM solarTests'
-            print(queryString)
             results = list()
             for row in sqlCursor.execute(queryString):
                 results.append(row)
