@@ -57,7 +57,6 @@ def runEDSTest(selectedCell):
     dhtResult = getTemperatureAndHumidity()
 
     if dhtResult is not None:
-        print("CUNT")
         temperature = dhtResult.temperature
         humidity = dhtResult.humidity
 

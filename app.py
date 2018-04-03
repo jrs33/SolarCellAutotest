@@ -19,7 +19,7 @@ def login():
 @app.route('/testEDS', methods=['GET','POST'])
 @requiresAuth
 def index():
-    return render_template('index.html', testStatus="No Test Running")
+    return render_template('index.html', testStatus="Result: ")
 
 @app.route('/testEDS/<int:cellSelect>')
 @requiresAuth
