@@ -48,21 +48,15 @@ class DataTransportFactory(object):
     def transportToDB(self,
                       ratio=0,
                       cellNumber=0,
-                      date=0,
-                      time=0,
+                      date="n",
+                      time="n",
                       temperature=0,
                       humidity=0):
-        try:
-            db = self.getDatabase()
-            sqlCursor = self.getDatabaseTunnel()
-
-            test = [(date,time,cellNumber,ratio,temperature,humidity),]
-            sqlCursor.executemany('INSERT INTO solarTests VALUES(?,?,?,?,?,?);',test)
-            db.commit()
-            db.close()
-            return
-        except sql.Error as error:
-            raise error
+        db = sql.connect(self.constants.SQL_DATABASE)
+        sqlCursor = db.cursor()
+        sqlCursor.execute("INSERT INTO solarTests VALUES(0,0,"+str(cellNumber)+","+str(ratio)+","+str(temperature)+","+str(humidity)+")")
+        db.commit()
+        db.close()
 
     def transportFromDB(self,
                         limit):

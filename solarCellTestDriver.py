@@ -1,4 +1,4 @@
-import time
+#import time
 import RPi.GPIO as GPIO
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
@@ -23,6 +23,8 @@ for our EDS tests. The tests go as follows:
 store various data locally and remotely 
 '''
 def runEDSTest(selectedCell):
+    cellDictionary = {12:"1", 16:"2", 20:"3", 21:"4"}
+
     gpio = GPIOControlFactory(0)
     adc = ADCControlFactory(0)
     transporter = DataTransportFactory(0)
@@ -59,11 +61,12 @@ def runEDSTest(selectedCell):
     if dhtResult is not None:
         temperature = dhtResult.temperature
         humidity = dhtResult.humidity
-
         #transporter.transportToUSB(ratio,selectedCell,str(datetime.datetime.now()))
         #transporter.transportToBufferFile(ratio,selectedCell,str(datetime.datetime.now()))
+        transporter.transportToDB(ratio,cellDictionary[selectedCell],"nil","nil",temperature,humidity)
+    else:
+        print("NO TEMP")
 
-    transporter.transportToDB()
     return ratio
 
 '''
