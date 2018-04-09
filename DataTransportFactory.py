@@ -25,9 +25,12 @@ class DataTransportFactory(object):
                        time=0,
                        temperature=0,
                        humidity=0):
-        with open(self.constants.CSV_PATH, 'a') as file:
-            solarBytesWriter = csv.writer(file)
-            solarBytesWriter.writerow([ratio,self.constants.PIN_TO_CELL_MAP[cellNumber],time,temperature,humidity])
+        try:
+            with open(self.constants.CSV_PATH, 'a') as file:
+                solarBytesWriter = csv.writer(file)
+                solarBytesWriter.writerow([ratio,self.constants.PIN_TO_CELL_MAP[cellNumber],time,temperature,humidity])
+        except:
+            print('Unable to write to usb')
 
     '''
     Transports test data to hidden csv for backup
@@ -38,9 +41,12 @@ class DataTransportFactory(object):
                               time=0,
                               temperature=0,
                               humidity=0):
-        with open(self.constants.BUFFER_PATH, 'a') as backupFile:
-            backupFileWriter = csv.writer(backupFile)
-            backupFileWriter.writerow([ratio,self.constants.PIN_TO_CELL_MAP[cellNumber],time,temperature,humidity])
+        try:
+            with open(self.constants.BUFFER_PATH, 'a') as backupFile:
+                backupFileWriter = csv.writer(backupFile)
+                backupFileWriter.writerow([ratio,self.constants.PIN_TO_CELL_MAP[cellNumber],time,temperature,humidity])
+        except:
+            print('Unable to write to buffer file')
 
     '''
     Transports test data to sql database
@@ -52,11 +58,14 @@ class DataTransportFactory(object):
                       time="n",
                       temperature=0,
                       humidity=0):
-        db = sql.connect(self.constants.SQL_DATABASE)
-        sqlCursor = db.cursor()
-        sqlCursor.execute("INSERT INTO solarTests VALUES(0,0,"+str(cellNumber)+","+str(ratio)+","+str(temperature)+","+str(humidity)+")")
-        db.commit()
-        db.close()
+        try:
+            db = sql.connect(self.constants.SQL_DATABASE)
+            sqlCursor = db.cursor()
+            sqlCursor.execute("INSERT INTO solarTests VALUES(0,0,"+str(cellNumber)+","+str(ratio)+","+str(temperature)+","+str(humidity)+")")
+            db.commit()
+            db.close()
+        except Exception as error:
+            raise(error)
 
     def transportFromDB(self,
                         limit):
