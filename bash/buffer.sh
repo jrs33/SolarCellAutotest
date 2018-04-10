@@ -5,5 +5,5 @@ if [ -e $buffer_file ]; then
 	exit
 fi
 
-touch buffer_file
-echo $file created
+touch $buffer_file
+echo $buffer_file created
