@@ -36,7 +36,7 @@ class TestingConstants(object):
 
 	@BUFFER_PATH.setter
 	def BUFFER_PATH(self, BUFFER_PATH):
-		self.__BUFFER_PATH = "/home/pi/Desktop/.sbBuffer.csv"
+		self.__BUFFER_PATH = "/home/pi/Desktop/solarbytes.csv"
 
 	@property
 	def SQL_DATABASE(self):
