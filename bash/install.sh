@@ -21,7 +21,6 @@ function install_package() {
 
 # calls to install various packages
 sudo apt-get install python3-pip
-sudo $BUILD_SYSTEM update
 install_package $WEB_DEV
 install_package $GUI
 install_package $RPI_GPIO
@@ -31,6 +30,8 @@ sudo $BUILD_SYSTEM install git build-essential python-pip python-dev python-smbu
 git clone https://github.com/adafruit/Adafruit_Python_MCP3008.git
 cd Adafruit_Python_MCP3008
 sudo python setup.py install
+sudo rm -r Adafruit_Python_MCP3008
 git clone https://github.com/adafruit/Adafruit_Python_GPIO.git
 cd Adafruit_Python_GPIO
 sudo python setup.py install
+sudo rm -r Adafruit_Python_GPIO
