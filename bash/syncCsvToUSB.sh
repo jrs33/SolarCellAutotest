@@ -28,13 +28,13 @@ function remove_old_csv() {
 
 function port_buffer_file() {
 	usb_result=$(check_usb_connection)
-	echo $usb_result
 	buffer_result=$(check_buffer_exists)
-	echo $buffer_result
 	if [ $usb_result == 1 ]; then
+		echo "usb not connected or uuid entered incorrectly"
 		exit
 	fi
 	if [ $buffer_result == 1 ]; then
+		echo "buffer csv does not exist"
 		exit
 	fi
 	remove_old_csv
