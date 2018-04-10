@@ -61,8 +61,8 @@ def runEDSTest(selectedCell):
     if dhtResult is not None:
         temperature = dhtResult.temperature
         humidity = dhtResult.humidity
-        #transporter.transportToUSB(ratio,selectedCell,str(datetime.datetime.now()))
-        #transporter.transportToBufferFile(ratio,selectedCell,str(datetime.datetime.now()))
+
+        transporter.transportToBufferFile(ratio,selectedCell,str(datetime.datetime.now()))
         transporter.transportToDB(ratio,cellDictionary[selectedCell],"nil","nil",temperature,humidity)
     else:
         print("NO TEMP")
