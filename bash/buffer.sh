@@ -1,5 +1,5 @@
 #!/bin/bash
-buffer_file=/home/pi/Desktop/.sbBuffer.csv
+buffer_file=/home/pi/Desktop/solarbytes.csv
 if [ -e $buffer_file ]; then
 	echo $file exists
 	exit
