@@ -12,8 +12,8 @@ function change_bash_permissions() {
 
 function change_wpa_permissions() {
 	if [ -e $WPA_FILE ]; then
-		chmod 777 $WPA_FILE
-		"wpa supplicant permissions changed"
+		sudo chmod 777 $WPA_FILE
+		echo "wpa_supplicant permissions changed"
 	else
 		echo "wpa_supplicant file does not exist"
 	fi		
