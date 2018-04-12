@@ -31,15 +31,16 @@ function port_buffer_file() {
 	usb_result=$(check_usb_connection)
 	buffer_result=$(check_buffer_exists)
 	if [ $usb_result == 1 ]; then
-		echo "usb not connected or uuid entered incorrectly"
+		echo "[ERROR]	USB not connected or uuid entered incorrectly. Try ./displayMounts to see the uuid."
 		exit
 	fi
 	if [ $buffer_result == 1 ]; then
-		echo "buffer csv does not exist"
+		echo "[ERROR]	Buffer csv does not exist"
 		exit
 	fi
 	remove_old_csv
 	cp $buffer_file $usb_path
+	echo "[INFO]	Successfully synced buffer data with usb"
 }
 
 port_buffer_file
