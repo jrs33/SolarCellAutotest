@@ -1,5 +1,6 @@
-#!/bin/bash
-usb_path=/media/pi/$1
+##!/bin/bash
+USB_UUID_FROM_DISPLAY_MOUNTS=""
+usb_path=/media/pi/$USB_UUID_FROM_DISPLAY_MOUNTS
 buffer_file=/home/pi/Desktop/solarbytes.csv
 csv_file=solarbytes.csv
 
