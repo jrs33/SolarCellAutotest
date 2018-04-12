@@ -26,6 +26,11 @@
 				<h1>SolarBytes Data Visualizer</h1>
 			</div>
 			<hr>
+			<div class="row" align="left" style="margin-top:20px">
+				<form class="form-inline" method="POST" action="{{ url_for('syncCsv') }}">
+					<button type="submit" class="btn btn-default">Download CSV to USB</button
+				</form>
+			</div>
 			<div class="row" align="center" style="margin-top:20px">
 				<div class="col-sm-6" style="background-color:#ffffff;height:200px">
 					<h3>Filter Criteria</h3>

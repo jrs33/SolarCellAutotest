@@ -7,6 +7,7 @@ from DataTransportFactory import DataTransportFactory
 from jinja2 import Environment, PackageLoader
 from auth import *
 import time
+import subprocess
 
 app = Flask("SolarBytes")
 constants = TestingConstants()
@@ -79,5 +80,13 @@ def filterAndAggregateQuery():
 
     result = dataTrans.transportFromDBFilterThenAggregate(filtCol,filtOp,filtVal,10,aggCol,opCol)
     return result
+
+@app.route('/data/syncCsv', methods=['POST'])
+@requiresAuth
+def syncCsv():
+    subprocess.call("./../bash/syncCsvToUSB.sh")
+    results = dataTrans.transportFromDB(-1)
+    count = dataTrans.getTotalTestCount()
+    return render_template('data.html', results=results, tableSize=len(results))
 
 app.run(debug=True, host='0.0.0.0')
