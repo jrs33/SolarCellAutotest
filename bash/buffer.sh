@@ -1,9 +1,10 @@
 #!/bin/bash
 buffer_file=/home/pi/Desktop/solarbytes.csv
 if [ -e $buffer_file ]; then
-	echo $file exists
+	echo "[WARN]	solarbytes buffer file already exists"
+	echo "[INFO]	exiting buffer script"
 	exit
 fi
 
 touch $buffer_file
-echo $buffer_file created
+echo "[INFO]	buffer file created"
