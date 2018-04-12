@@ -1,13 +1,17 @@
 #!/bin/bash
 
-APP_FILE="../app.py"
+APP_DIRECTORY="../"
+APP_FILE="app.py"
+APP_FILE_REL_LOC=$APP_DIRECTORY$APP_FILE
 
 # start the web server by running the python script
 function start_server() {
-	if [ -e $APP_FILE ]; then
+	if [ -e $APP_FILE_REL_LOC ]; then
+		cd $APP_DIRECTORY
+		echo "[INFO]	starting up server..."
 		./$APP_FILE
 	else
-		echo "app file not found"
+		echo "[ERROR]	app file not found"
 	fi
 }
 
