@@ -40,7 +40,6 @@ function port_buffer_file() {
 	fi
 	remove_old_csv
 	cp $buffer_file $usb_path
-	echo "[INFO]	Successfully synced buffer data with usb"
 }
 
 port_buffer_file
