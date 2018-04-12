@@ -1,6 +1,6 @@
 #!/bin/bash
 
-APP_DIRECTORY="../"
+APP_DIRECTORY="../app/"
 APP_FILE="app.py"
 APP_FILE_REL_LOC=$APP_DIRECTORY$APP_FILE
 
