@@ -1,5 +1,5 @@
 #!/bin/bash
-DATABASE=../solarbytes.db
+DATABASE=../app/solarbytes.db
 SQL_FILE=../sql/solarTests.sql
 
 if [ ! -e $DATABASE ]; then
