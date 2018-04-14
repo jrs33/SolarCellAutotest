@@ -31,6 +31,7 @@ With the initial setup done, it is important to add some settings to other scrip
 1) We need to be able to sync EDS test data to an onboard USB. Since each USB has a unique UUID we must dynamically recognize this USB. Run `./displayMounts` to see the UUID of your USB, which will be of the form **XXXX-XXXX**. 
 2) With this UUID, open up the `syncCsvToUSB.sh` bash script, and notice the second line, which has a variable `USB_UUID_FROM_DISPLAY_MOUNTS=""`. Add the UUID you found from step 1 to this variable, and save the shell script with this new variable.
 3) Start up the Flask web server by typing in `./webserver.sh`
+4) Download ngrok [here](https://ngrok.com/download); **BE SURE TO DOWNLOAD THE LINUX EXECUTABLE**. This downloads a standalone binary file, which Linux systems will not be able to run directly. To make sure the tunnel renew process works, you need to type `mv <ngrok_binary> /usr/local/bin/` to allow the Pi to recognize the binary file. You should be able to verify by type `ngrok http 80`, and you should see a screen displaying various url and traffic information. If so, you're all set to connect SolarBytes to the open web!
 
 Thats it! Data should now be able to be synced on the USB with that UUID connected to your Pi.
 
