@@ -18,11 +18,12 @@ To get started, we have outlined steps below to show you how to get your Pi up a
 
 ### Installing Dependencies Without the GUI:
 1) Obtain a raspberry pi with an installed OS and connect to a SolarBytes hardware system 
-2) `git clone https://github.com/jrs33/SolarCellAutotest.git` to get the repo on the Pi
-3) `cd <repo_location>/SolarCellAutotest/bash`
-4) Run `sh permissions.sh` to make all shells executable
-5) Obtain a wifi network from your system administrator and enter the proper fields into the `<repo_location>/SolarCellAutotest/bash/network_template.txt` template file. This is SUPER IMPORTANT and will allow the Pi to auto-connect to your areas wifi network. Check out  [this link](https://w1.fi/cgit/hostap/plain/wpa_supplicant/wpa_supplicant.conf) to learn about various network objects used to auto-connect to see what works for you
-6) Run `./solarbytes_setup_headless`. This will download all dependencies, setup your database, prepare buffers and configure your wifi. **This will also reboot your Pi**. 
+2) Go [here](https://www.raspberrypi.org/documentation/remote-access/ssh/) to set up the ssh
+3) `git clone https://github.com/jrs33/SolarCellAutotest.git` to get the repo on the Pi
+4) `cd <repo_location>/SolarCellAutotest/bash`
+5) Run `sh permissions.sh` to make all shells executable
+6) Obtain a wifi network from your system administrator and enter the proper fields into the `<repo_location>/SolarCellAutotest/bash/network_template.txt` template file. This is SUPER IMPORTANT and will allow the Pi to auto-connect to your areas wifi network. Check out  [this link](https://w1.fi/cgit/hostap/plain/wpa_supplicant/wpa_supplicant.conf) to learn about various network objects used to auto-connect to see what works for you
+7) Run `./solarbytes_setup_headless`. This will download all dependencies, setup your database, prepare buffers and configure your wifi. **This will also reboot your Pi**. 
 
 With these steps done, the installation process should be complete.
 
