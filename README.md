@@ -12,6 +12,8 @@ This software is portable on any Pi, and provides a needed solution for the Elec
 ## Introduction
 To get started, we have outlined steps below to show you how to get your Pi up and running to integrate with your EDS testing hardware. The installation process has been condensed into various bash scripts to allow you to easily setup your SolarBytes system. 
 
+**Preconditions: You must have a Raspberry Pi with apt-get and python3 already installed, and with Raspbian running. The setup process requires these as a baseline to be able to obtain other packages.**
+
 **NOTE:  If you are installing locally with a GUI, you might find it easier to use the onboard setup GUI. This GUI allows you to add in a wifi network, clear previous wifi networks and start/stop the web server manually, while the alternate route is to do so via the CLI.**
 
 ### Installing Dependencies Without the GUI:
@@ -41,6 +43,7 @@ With the initial setup done, it is important to add some settings to other scrip
 2) With this UUID, open up the `syncCsvToUSB.sh` bash script, and notice the second line, which has a variable `USB_UUID_FROM_DISPLAY_MOUNTS=""`. Add the UUID you found from step 1 to this variable, and save the shell script with this new variable.
 3) **If you did not start the server in the GUI** start up the Flask web server by typing in `./webserver.sh` 
 4) Download ngrok [here](https://ngrok.com/download); **BE SURE TO DOWNLOAD THE LINUX EXECUTABLE**. This downloads a standalone binary file, which Linux systems will not be able to run directly. To make sure the tunnel renew process works, you need to type `mv <ngrok_binary> /usr/local/bin/` to allow the Pi to recognize the binary file. You should be able to verify by type `ngrok http 80`, and you should see a screen displaying various url and traffic information. If so, you're all set to connect SolarBytes to the open web!
+5) Finally you need to set your specific user name and password to gate the web application. Go into the `auth.py` file in the app folder and edit the `checkAuth()` function to your desired username and password.
 
 Thats it! Data should now be able to be synced on the USB with that UUID connected to your Pi.
 
