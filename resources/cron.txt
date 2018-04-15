@@ -20,6 +20,7 @@
 # For more information see the manual pages of crontab(5) and cron(8)
 # 
 # m h  dom mon dow   command
-10 0 * * * /home/pi/Desktop/SolarCellAutotest/bash/tunnelRenew.sh
+PATH=/usr/local/bin
+0 10 * * * /home/pi/Desktop/SolarCellAutotest/bash/tunnelRenew.sh
 0 0 * * * /home/pi/Desktop/SolarCellAutotest/bash/syncCsvToUSB.sh
-12 0 * * * /home/pi/Desktop/SolarCellAutotest/bash/runTest.sh
+0 12 * * * /home/pi/Desktop/SolarCellAutotest/bash/runTest.sh
