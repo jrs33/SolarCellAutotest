@@ -1,9 +1,6 @@
 
 # SolarBytes
-Solar cells are currently cleaned using water, which is incredibly wasteful and requires on site personnel. To alleviate this issue, the Boston University ElectroDynamics lab
-has built a technology called an ElectroDynamic screen, which uses electrical polarity to remove dust. In order to fully assure this system is functional, a team of Engineers
-at BU collaborated to create SolarBytes, a fully automated testing system that uses proprietary hardware and software that integrates with the EDS and an array of solar cells to 
-measure the effectiveness of performance restoration with EDS cleaning methods. The software in this repository includes things like:
+Solar cells are currently cleaned using water, which is incredibly wasteful and requires on site personnel. To alleviate this issue, the Boston University ElectroDynamics lab has built a technology called an ElectroDynamic screen, which uses electrical polarity to remove dust. In order to fully assure this system is functional, we collaborated to create SolarBytes, a fully automated testing system that uses proprietary hardware and software that integrates with the EDS and an array of solar cells to  measure the effectiveness of performance restoration with EDS cleaning methods. The software in this repository includes things like:
 
 - Scripts called by chron to auto-run tests, auto-connect to wifi and auto-renew open web tunnels
 - An interactive GUI for on-site users to manage the system
@@ -15,22 +12,34 @@ This software is portable on any Pi, and provides a needed solution for the Elec
 ## Introduction
 To get started, we have outlined steps below to show you how to get your Pi up and running to integrate with your EDS testing hardware. The installation process has been condensed into various bash scripts to allow you to easily setup your SolarBytes system. 
 
-### Installing Dependencies:
+**NOTE:  If you are installing locally with a GUI, you might find it easier to use the onboard setup GUI. This GUI allows you to add in a wifi network, clear previous wifi networks and start/stop the web server manually, while the alternate route is to do so via the CLI.**
+
+### Installing Dependencies Without the GUI:
 1) Obtain a raspberry pi with an installed OS and connect to a SolarBytes hardware system 
 2) `git clone https://github.com/jrs33/SolarCellAutotest.git` to get the repo on the Pi
 3) `cd <repo_location>/SolarCellAutotest/bash`
 4) Run `sh permissions.sh` to make all shells executable
 5) Obtain a wifi network from your system administrator and enter the proper fields into the `<repo_location>/SolarCellAutotest/bash/network_template.txt` template file. This is SUPER IMPORTANT and will allow the Pi to auto-connect to your areas wifi network. Check out  [this link](https://w1.fi/cgit/hostap/plain/wpa_supplicant/wpa_supplicant.conf) to learn about various network objects used to auto-connect to see what works for you
-6) Run `./solarbytes_setup`. This will download all dependencies, setup your database, prepare buffers and configure your wifi. **This will also reboot your Pi**. 
+6) Run `./solarbytes_setup_headless`. This will download all dependencies, setup your database, prepare buffers and configure your wifi. **This will also reboot your Pi**. 
 
 With these steps done, the installation process should be complete.
+
+### Installing Dependencies With the GUI:
+1) Obtain a raspberry pi with an installed OS and connect to a SolarBytes hardware system 
+2) `git clone https://github.com/jrs33/SolarCellAutotest.git` to get the repo on the Pi
+3) `cd <repo_location>/SolarCellAutotest/bash`
+4) Run `sh permissions.sh` to make all shells executable
+5) Run `./solarbytes_setup_local`. This will download all dependencies, setup your database, and prepare buffers.
+6) Now, type `./runGuiBuilder.sh` to start your GUI. A screen should appear
+7) Type your network object into the text area and click the setup wifi button. This will save your wifi and reboot your pi.
+8) Once your Pi is booted back up, boot up the GUI again, and click the start up web server button. Once this is done, the onboard server will be working and you should be all set to continue!
 
 ### Manual Configuration
 With the initial setup done, it is important to add some settings to other scripts to personalize your system and also manually start up other scripts that always need to be running
 
 1) We need to be able to sync EDS test data to an onboard USB. Since each USB has a unique UUID we must dynamically recognize this USB. Run `./displayMounts` to see the UUID of your USB, which will be of the form **XXXX-XXXX**. 
 2) With this UUID, open up the `syncCsvToUSB.sh` bash script, and notice the second line, which has a variable `USB_UUID_FROM_DISPLAY_MOUNTS=""`. Add the UUID you found from step 1 to this variable, and save the shell script with this new variable.
-3) Start up the Flask web server by typing in `./webserver.sh`
+3) **If you did not start the server in the GUI** start up the Flask web server by typing in `./webserver.sh` 
 4) Download ngrok [here](https://ngrok.com/download); **BE SURE TO DOWNLOAD THE LINUX EXECUTABLE**. This downloads a standalone binary file, which Linux systems will not be able to run directly. To make sure the tunnel renew process works, you need to type `mv <ngrok_binary> /usr/local/bin/` to allow the Pi to recognize the binary file. You should be able to verify by type `ngrok http 80`, and you should see a screen displaying various url and traffic information. If so, you're all set to connect SolarBytes to the open web!
 
 Thats it! Data should now be able to be synced on the USB with that UUID connected to your Pi.
