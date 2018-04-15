@@ -31,7 +31,7 @@ With these steps done, the installation process should be complete.
 4) Run `sh permissions.sh` to make all shells executable
 5) Run `./solarbytes_setup_local`. This will download all dependencies, setup your database, and prepare buffers.
 6) Now, type `./runGuiBuilder.sh` to start your GUI. A screen should appear
-7) Type your network object into the text area and click the setup wifi button. This will save your wifi and reboot your pi.
+7) Type your [network object](https://w1.fi/cgit/hostap/plain/wpa_supplicant/wpa_supplicant.conf) into the text area and click the setup wifi button. This will save your wifi and reboot your pi.
 8) Once your Pi is booted back up, boot up the GUI again, and click the start up web server button. Once this is done, the onboard server will be working and you should be all set to continue!
 
 ### Manual Configuration
