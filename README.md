@@ -12,6 +12,8 @@ This software is portable on any Pi, and provides a needed solution for the Elec
 ## Introduction
 To get started, we have outlined steps below to show you how to get your Pi up and running to integrate with your EDS testing hardware. The installation process has been condensed into various bash scripts to allow you to easily setup your SolarBytes system. 
 
+**Preconditions: You must have a Raspberry Pi with apt-get and python3 already installed, and with Raspbian running. The setup process requires these as a baseline to be able to obtain other packages.**
+
 **NOTE:  If you are installing locally with a GUI, you might find it easier to use the onboard setup GUI. This GUI allows you to add in a wifi network, clear previous wifi networks and start/stop the web server manually, while the alternate route is to do so via the CLI.**
 
 ### Installing Dependencies Without the GUI:
