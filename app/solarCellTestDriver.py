@@ -63,7 +63,7 @@ def runEDSTest(selectedCell):
         humidity = dhtResult.humidity
 
         transporter.transportToBufferFile(ratio,selectedCell,time.strftime("%x"),time.strftime("%X"),temperature,humidity)
-        transporter.transportToDB(ratio,cellDictionary[selectedCell],"time.strftime("%x"),time.strftime("%X"),temperature,humidity)
+        transporter.transportToDB(ratio,cellDictionary[selectedCell],time.strftime("%x"),time.strftime("%X"),temperature,humidity)
     else:
         transporter.transportToBufferFile(ratio,selectedCell,time.strftime("%x"),time.strftime("%X"))
         transporter.transportToDB(ratio,cellDictionary[selectedCell],time.strftime("%x"),time.strftime("%X"))
