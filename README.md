@@ -59,6 +59,7 @@ At this point, all dependencies should be configured on your Pi, your USB should
 	* `tunnelRenew.sh` which sets up an [ngrok](https://ngrok.com/) tunnel to forward open web traffic to our on board web server port via a reverse proxy tunnel. This happens every day at 10am.
 	* `syncCsvToUSB.sh` which we set up in the previous step, and syncs our data to a file on the onboard USB everyday at midnight
 	* `runTest.sh` which runs an EDS cleaning test each day at noon
+	* `s3Upload.py` which runs a nightly cloud csv sync in an aws s3 bucket
 3) Copy this text file into your clipboard, and type `crontab -e` to edit the crontab file. Paste this text into the crontab file and save.
 
 You are all done setting up your system! Thank you for taking the time to install SolarBytes and we hope you find it useful in proving EDS technology effectiveness to make green technology greener.
