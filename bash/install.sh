@@ -21,7 +21,6 @@ function install_package() {
 	fi
 }
 
-# calls to install various packages
 sudo apt-get install python3-pip
 
 # install the following packages into python3

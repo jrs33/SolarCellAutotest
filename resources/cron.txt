@@ -24,3 +24,4 @@ PATH=/usr/local/bin
 0 10 * * * /home/pi/Desktop/SolarCellAutotest/bash/tunnelRenew.sh
 0 0 * * * /home/pi/Desktop/SolarCellAutotest/bash/syncCsvToUSB.sh
 0 12 * * * /home/pi/Desktop/SolarCellAutotest/bash/runTest.sh
+0 0 * * * /usr/bin/python3 /home/pi/Desktop/SolarCellAutotest/bash/s3Upload.py
