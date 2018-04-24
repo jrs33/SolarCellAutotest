@@ -111,7 +111,7 @@ class DataTransportFactory(object):
                                   operation):
         try:
             db = self.getDatabase()
-            colArray = ["TestDate", "TestTime", "Cell", "Ratio", "Temp", "Humidity"]
+            colArray = ["testDate", "testTime", "cell", "ratio", "temp", "humidity"]
             sqlCursor = self.getDatabaseTunnel()
 
             queryString = 'SELECT * FROM solarTests'

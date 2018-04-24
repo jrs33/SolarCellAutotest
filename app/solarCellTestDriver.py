@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
 import dht11
-import datetime
+import time
 
 from GPIOControlFactory import *
 from ADCControlFactory import *
@@ -62,10 +62,11 @@ def runEDSTest(selectedCell):
         temperature = dhtResult.temperature
         humidity = dhtResult.humidity
 
-        transporter.transportToBufferFile(ratio,selectedCell,str(datetime.datetime.now()))
-        transporter.transportToDB(ratio,cellDictionary[selectedCell],"nil","nil",temperature,humidity)
+        transporter.transportToBufferFile(ratio,selectedCell,time.strftime("%x"),time.strftime("%X"),temperature,humidity)
+        transporter.transportToDB(ratio,cellDictionary[selectedCell],"time.strftime("%x"),time.strftime("%X"),temperature,humidity)
     else:
-        print("NO TEMP")
+        transporter.transportToBufferFile(ratio,selectedCell,time.strftime("%x"),time.strftime("%X"))
+        transporter.transportToDB(ratio,cellDictionary[selectedCell],time.strftime("%x"),time.strftime("%X"))
 
     return ratio
 

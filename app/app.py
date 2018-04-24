@@ -89,10 +89,10 @@ def syncCsv():
     count = dataTrans.getTotalTestCount()
     return render_template('data.html', results=results, tableSize=len(results))
 
-@app.route('/data/syncCloud', methods=['POST])
+@app.route('/data/syncCloud', methods=['POST'])
 @requiresAuth
 def syncCloud():
-    subprocess.call("./../bash.s3Upload.py")
+    subprocess.call("./../bash/s3Upload.py")
     results = dataTrans.transportFromDB(-1)
     count = dataTrans.getTotalTestCount()
     return render_template('data.html', results=results, tableSize=len(results))
