@@ -5,6 +5,8 @@ GUI="tkinter"
 RPI_GPIO="RPi.GPIO"
 DB="sqlite3"
 XTERM="xterm"
+BOTO="boto3"
+AWSCLI="awscli"
 
 # check if a package is installed and if it isnt
 # install the package
@@ -28,6 +30,8 @@ install_package $GUI
 install_package $RPI_GPIO
 install_package $DB
 install_package $XTERM
+install_package $BOTO
+install_package $AWSCLI
 
 sudo $BUILD_SYSTEM install git build-essential python-pip python-dev python-smbus
 
