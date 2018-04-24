@@ -10,6 +10,13 @@ function change_bash_permissions() {
 	done
 }
 
+function change_py_script_permissions() {
+	for file in *.py; do
+		echo "[INFO]	$file permissions changed"
+		chmod +x $file
+	done
+}
+
 function change_wpa_permissions() {
 	if [ -e $WPA_FILE ]; then
 		sudo chmod 777 $WPA_FILE
@@ -22,4 +29,5 @@ function change_wpa_permissions() {
 # bash function call
 change_bash_permissions
 change_wpa_permissions
+change_py_script_permissions
 chmod 777 network_template.txt
