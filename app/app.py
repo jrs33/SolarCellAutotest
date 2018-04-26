@@ -79,7 +79,8 @@ def filterAndAggregateQuery():
     filtVal = request.form.get('filt_val')
 
     result = dataTrans.transportFromDBFilterThenAggregate(filtCol,filtOp,filtVal,10,aggCol,opCol)
-    return result
+    results = dataTrans.transportFromDBFiltered(filtCol,filtOp,filtVal,10)
+    return render_template('data.html', results=results, tableSize=len(results), aggResult=result)
 
 @app.route('/data/syncCsv', methods=['POST'])
 @requiresAuth

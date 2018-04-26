@@ -102,7 +102,10 @@ class DataTransportFactory(object):
             db = self.getDatabase()
             sqlCursor = self.getDatabaseTunnel()
 
-            queryString = 'SELECT * FROM solarTests WHERE ' + str(column) + ' ' + str(operation) + ' ' + str(value) + ' LIMIT ' + str(limit) + ';'
+            if(limit >= 0):
+                queryString = 'SELECT * FROM solarTests WHERE ' + str(column) + ' ' + str(operation) + ' ' + str(value) + ';'
+            else:
+                queryString = 'SELECT * FROM solarTests WHERE ' + str(column) + ' ' + str(operation) + ' ' + str(value) + ' LIMIT ' + str(limit) + ';'
             results = list()
             for row in sqlCursor.execute(queryString):
                 results.append(row)
@@ -151,8 +154,9 @@ class DataTransportFactory(object):
                                            aggCol,
                                            aggOp):
         try:
-            colArray = ["TestDate", "TestTime", "Cell", "Ratio", "Temp", "Humidity"]
+            colArray = ["time","date","cellNumber", "ratio", "temp", "humidity"]
             filteredResults = self.transportFromDBFiltered(filtCol,filtOp,filtVal,filtLimit)
+
             if(aggOp == "AVG"):
                 result = self.getAverage(filteredResults, colArray.index(aggCol))
             if(aggOp == "MIN"):
@@ -162,7 +166,6 @@ class DataTransportFactory(object):
             if(aggOp == "SUM"):
                 result = self.getSum(filteredResults, colArray.index(aggCol))
 
-            print(result)
             return str(result)
         except Exception as error:
             raise error
@@ -198,7 +201,7 @@ class DataTransportFactory(object):
 
         sum = 0
         for row in listRows:
-            sum = sum + row[index]
+            sum = sum + float(row[index])
 
         average = sum/len(listRows)
         return average
@@ -206,7 +209,7 @@ class DataTransportFactory(object):
     def getMinimum(self, listRows, index):
         numArray = list()
         for row in listRows:
-            numArray.append(row[index])
+            numArray.append(float(row[index]))
 
         minimum = min(numArray)
         return minimum
@@ -214,7 +217,7 @@ class DataTransportFactory(object):
     def getMaximum(self, listRows, index):
         numArray = list()
         for row in listRows:
-            numArray.append(row[index])
+            numArray.append(float(row[index]))
 
         maximum = max(numArray)
         return maximum
@@ -222,6 +225,6 @@ class DataTransportFactory(object):
     def getSum(self, listRows, index):
         sum = 0
         for row in listRows:
-            sum = sum + row[index]
+            sum = sum + float(row[index])
 
         return sum
