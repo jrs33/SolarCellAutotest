@@ -31,7 +31,7 @@ class DataTransportFactory(object):
         try:
             with open(self.constants.CSV_PATH, 'a') as file:
                 solarBytesWriter = csv.writer(file)
-                solarBytesWriter.writerow([ratio,self.constants.PIN_TO_CELL_MAP[cellNumber],time,temperature,humidity])
+                solarBytesWriter.writerow([date,time,ratio,self.constants.PIN_TO_CELL_MAP[cellNumber],temperature,humidity])
         except:
             print('Unable to write to usb')
 
@@ -48,7 +48,7 @@ class DataTransportFactory(object):
         try:
             with open(self.constants.BUFFER_PATH, 'a') as backupFile:
                 backupFileWriter = csv.writer(backupFile)
-                backupFileWriter.writerow([ratio,self.constants.PIN_TO_CELL_MAP[cellNumber],time,temperature,humidity])
+                backupFileWriter.writerow([date,time,ratio,self.constants.PIN_TO_CELL_MAP[cellNumber],temperature,humidity])
         except:
             print('Unable to write to buffer file')
 

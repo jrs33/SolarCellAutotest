@@ -39,7 +39,8 @@ class ADCControlFactory(object):
         total = 0
         print("Interpreting data...")
         initialMeasurement = True
-        for measurementNumber in range(10021):
+        initialDelay = 10021
+        for measurementNumber in range(initialDelay):
             # Allows for measurements to stabilize using count
             if(measurementNumber > 10000):
                 values = [0]*1
@@ -74,6 +75,6 @@ class ADCControlFactory(object):
     def isCloudCovered(self, oldValue, newValue):
         if(oldValue == newValue):
             return False
-        if((abs(oldValue - newValue)/oldValue)*100 > 20):
+        if((abs(oldValue - newValue)/oldValue)*100 > 30):
             return True
         return False
