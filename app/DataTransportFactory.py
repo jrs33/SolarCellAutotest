@@ -17,11 +17,14 @@ class DataTransportFactory(object):
         self.constants = TestingConstants()
 
     '''
+    DEPRECATED
+
     Transports test data to local mounted USB
     '''
     def transportToUSB(self,
                        ratio=0,
                        cellNumber=0,
+                       date=0,
                        time=0,
                        temperature=0,
                        humidity=0):
@@ -38,6 +41,7 @@ class DataTransportFactory(object):
     def transportToBufferFile(self,
                               ratio=0,
                               cellNumber=0,
+                              date=0,
                               time=0,
                               temperature=0,
                               humidity=0):
@@ -54,14 +58,16 @@ class DataTransportFactory(object):
     def transportToDB(self,
                       ratio=0,
                       cellNumber=0,
-                      date="n",
-                      time="n",
+                      date="0",
+                      time="0",
                       temperature=0,
                       humidity=0):
         try:
             db = sql.connect(self.constants.SQL_DATABASE)
             sqlCursor = db.cursor()
-            sqlCursor.execute("INSERT INTO solarTests VALUES(0,0,"+str(cellNumber)+","+str(ratio)+","+str(temperature)+","+str(humidity)+")")
+            insertString = "INSERT INTO solarTests VALUES('{}','{}',{},{},{},{})"
+            formatted = insertString.format(date,time,cellNumber,ratio,temperature,humidity)
+            sqlCursor.execute(formatted)
             db.commit()
             db.close()
         except Exception as error:

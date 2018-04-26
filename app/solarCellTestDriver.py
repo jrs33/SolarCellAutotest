@@ -36,6 +36,7 @@ def runEDSTest(selectedCell):
     try:
         averagePreClean = adc.gatherADCData()
     except ValueError as error:
+        gpio.disengageGPIO(selectedCell)
         return repr(error)
     gpio.disengageGPIO(selectedCell)
 
@@ -48,6 +49,7 @@ def runEDSTest(selectedCell):
     try:
         averagePostClean = adc.gatherADCData()
     except ValueError as error:
+        gpio.disengageGPIO(selectedCell)
         return repr(error)
     gpio.disengageGPIO(selectedCell)
 
@@ -66,7 +68,7 @@ def runEDSTest(selectedCell):
         transporter.transportToDB(ratio,cellDictionary[selectedCell],time.strftime("%x"),time.strftime("%X"),temperature,humidity)
     else:
         transporter.transportToBufferFile(ratio,selectedCell,time.strftime("%x"),time.strftime("%X"))
-        transporter.transportToDB(ratio,cellDictionary[selectedCell],time.strftime("%x"),time.strftime("%X"))
+        transporter.transportToDB(ratio,cellDictionary[selectedCell],time.strftime("%x"),time.strftime("%X"),0,0)
 
     return ratio
 
