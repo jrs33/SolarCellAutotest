@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#
+# Renews ngrok tunnel with domain equal to SUBDOMAIN.ngrok.io to connect to open web
+#
 SUBDOMAIN=solarbytes
 NGROK_EXECUTABLE=ngrok
 

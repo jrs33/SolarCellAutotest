@@ -1,4 +1,8 @@
 #!/bin/bash
+
+#
+# Replaces/Creates local SQLite database file
+#
 DATABASE=../app/solarbytes.db
 SQL_FILE=../sql/solarTests.sql
 

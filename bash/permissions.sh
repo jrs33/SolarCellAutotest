@@ -2,7 +2,9 @@
 
 WPA_FILE="/etc/wpa_supplicant/wpa_supplicant.conf"
 
-# changes files in current directory to executable
+#
+# Changes files in current directory to executable provided the file has a #! shebang binary
+#
 function change_bash_permissions() {
 	for file in *.sh; do
 		echo "[INFO]	$file permissions changed"

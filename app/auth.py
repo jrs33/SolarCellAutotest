@@ -1,6 +1,10 @@
 from functools import wraps
 from flask import request, Response
 
+'''
+Utility wrapper functions used on routes to ensure basic authentication
+'''
+
 def checkAuth(username, password):
 	return username == 'bu_eds_admin' and password == 'bostoncells36'
 

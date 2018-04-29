@@ -2,7 +2,9 @@
 
 FILE="../gui/setupGUI.py"
 
-# checks for existence of file and runs the test
+#
+# Boots up setup GUI
+#
 function run_gui_setup() {
 	if [ -e $FILE ]; then
 		echo "[INFO]	opening gui..."

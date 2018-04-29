@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#
+# Starts up web server on port 5000
+#
 APP_DIRECTORY="../app/"
 APP_FILE="app.py"
 APP_FILE_REL_LOC=$APP_DIRECTORY$APP_FILE

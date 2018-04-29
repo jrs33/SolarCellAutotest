@@ -1,3 +1,7 @@
+'''
+Object used to centralize major immutable testing constants
+'''
+
 class TestingConstants(object):
 	def __init__(self):
 		self.PIN_TO_CELL_MAP = {12 : "1", 16 : "2", 20 : "3", 21 : "4", 6 : "5", 13 : "6", 19 : "7", 26 : "8"}

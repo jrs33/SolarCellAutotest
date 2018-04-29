@@ -1,3 +1,6 @@
+'''
+All constants critical to GUI UI
+'''
 class GuiSetupConstants(object):
     def __init__(self):
         self.TITLE = "SolarBytes Control Panel"

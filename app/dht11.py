@@ -1,6 +1,9 @@
 import time
 import RPi
 
+'''
+Stock DHT library to interface temperature and humidity readings with Python code
+'''
 
 class DHT11Result:
     'DHT11 sensor result returned by DHT11.read() method'

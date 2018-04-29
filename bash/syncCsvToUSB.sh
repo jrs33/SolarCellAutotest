@@ -1,5 +1,9 @@
 #!/bin/bash
-USB_UUID_FROM_DISPLAY_MOUNTS="6CE9-9EE6"
+
+#
+# Synchronizes buffer csv to USB with UUID USB_UUID_FROM_DISPLAY_MOUNTS
+#
+USB_UUID_FROM_DISPLAY_MOUNTS=""
 usb_path=/media/pi/$USB_UUID_FROM_DISPLAY_MOUNTS
 buffer_file=/home/pi/Desktop/solarbytes.csv
 csv_file=solarbytes.csv

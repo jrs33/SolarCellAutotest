@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#
+# Runs a test to get ratios of all 4 cells before and after cleaning by the EDS
+#
 FILE="../solarCellTestDriver.py"
 ALL_CELLS=0
 USERNAME=""

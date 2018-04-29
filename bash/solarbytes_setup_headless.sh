@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#
+# Runs setup process if setting up with CLI
+#
 ./install.sh
 ./sql.sh
 ./buffer.sh

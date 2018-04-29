@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#
+# Sets up auto-connection to wifi using network_template.txt network object credentials
+#
 WPA_FILE="/etc/wpa_supplicant/wpa_supplicant.conf"
 NETWORK_TEXT="./network_template.txt"
 

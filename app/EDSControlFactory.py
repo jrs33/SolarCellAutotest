@@ -4,7 +4,7 @@ from TestingConstants import TestingConstants
 
 '''
 
-Object used to interface the testing logic with the EDS
+Object used to interface the Pi with the EDS
 power supply
 
 '''

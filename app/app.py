@@ -9,6 +9,10 @@ from auth import *
 import time
 import subprocess
 
+'''
+Centralized routing file to interface templates with backend code using Flask
+'''
+
 app = Flask("SolarBytes")
 constants = TestingConstants()
 dataTrans = DataTransportFactory(1)

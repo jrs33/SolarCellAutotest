@@ -1,6 +1,11 @@
 #!/usr/bin/python3
+
 import boto3
 import csv
+
+#
+# Python script to sync buffer csv to s3 bucket names BUCKET_NAME
+#
 
 BUCKET_NAME = 'solarbytes-csv-uploads'
 KEY_NAME = 'solarbytes.csv'

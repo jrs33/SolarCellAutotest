@@ -2,6 +2,9 @@ import tkinter as tk
 import wifiFunctions as wf
 import webServerFunctions as wsf
 
+'''
+Object to interface GUI with backend functionality
+'''
 class SolarBytesControlPanelApp:
     def __init__(self, window, constants):
         self.window = window

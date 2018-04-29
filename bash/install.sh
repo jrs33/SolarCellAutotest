@@ -1,4 +1,8 @@
 #!/bin/bash
+
+#
+# Installs all required dependencies to connect Pi to Solarbytes hardware
+#
 BUILD_SYSTEM="pip3"
 WEB_DEV="Flask"
 GUI="tkinter"
