@@ -13,7 +13,7 @@ from EDSControlFactory import *
 This is a function that contains the logic
 for our EDS tests. The tests go as follows:
 
-1) Run test on selected cell, or all cells if bulk is True, without the EDS running
+1) Run test on selected cell, or all cells if bulk is True, without the EDS running IF humidity is 30-50%
 2) Record the data from this test
 3) Pause the test and turn on ALL EDS's for 2 minutes
 4) Turn off the EDS
@@ -22,6 +22,9 @@ for our EDS tests. The tests go as follows:
 store various data locally and remotely 
 '''
 def runEDSTest(selectedCell, bulk=False):
+    if(not checkHumidityPreconditions()):
+        return 'Humidity not in 30-50 range; aborting test'
+
     cellDictionary = {12:"1", 16:"2", 20:"3", 21:"4"}
 
     transporter = DataTransportFactory(0)
@@ -121,3 +124,16 @@ def getTemperatureAndHumidity():
     print(result)
     if result.is_valid():
         return result
+
+def checkHumidityPreconditions():
+    dhtResult = getTemperatureAndHumidity()
+
+    if dhtResult is not None:
+        humidity = dhtResult.humidity
+        if(humidity >= 30 and humidity <= 50):
+            return True
+        else:
+            print('Humidity not in 30-50 range; aborting test')
+            return False
+    else:
+        return False
