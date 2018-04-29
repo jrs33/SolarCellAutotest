@@ -25,7 +25,10 @@ def index():
 @app.route('/testEDS/<int:cellSelect>')
 @requiresAuth
 def testEDS(cellSelect):
-    ratio = runEDSTest(cellSelect)
+    if(cellSelect == 0):
+        ratio = runEDSTest(cellSelect, True)
+    else:
+        ratio = runEDSTest(cellSelect, False)
     return render_template('index.html', testStatus="Result: "+str(ratio))
 
 @app.route('/data/table')

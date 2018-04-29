@@ -1,4 +1,3 @@
-#import time
 import RPi.GPIO as GPIO
 import Adafruit_GPIO.SPI as SPI
 import Adafruit_MCP3008
@@ -14,49 +13,58 @@ from EDSControlFactory import *
 This is a function that contains the logic
 for our EDS tests. The tests go as follows:
 
-1) Run test on selected cell without the EDS running
+1) Run test on selected cell, or all cells if bulk is True, without the EDS running
 2) Record the data from this test
-3) Pause the test and turn on the EDS for 2 minutes
+3) Pause the test and turn on ALL EDS's for 2 minutes
 4) Turn off the EDS
 5) Repeat 1 & 2
 6) Compare the ratios of before and after cleaning and
 store various data locally and remotely 
 '''
-def runEDSTest(selectedCell):
+def runEDSTest(selectedCell, bulk=False):
     cellDictionary = {12:"1", 16:"2", 20:"3", 21:"4"}
 
-    gpio = GPIOControlFactory(0)
-    adc = ADCControlFactory(0)
     transporter = DataTransportFactory(0)
     eds = EDSControlFactory(0)
 
-    # Step 1 and 2
-    GPIO.setmode(GPIO.BCM)
-    gpio.engageGPIO(selectedCell)
-    try:
-        averagePreClean = adc.gatherADCData()
-    except ValueError as error:
-        gpio.disengageGPIO(selectedCell)
-        return repr(error)
-    gpio.disengageGPIO(selectedCell)
+    # Gather pre-cleaning averages
+    if(not bulk):
+        averagePreClean = engageAndGatherCurrentAverage(selectedCell)
+    else:
+        averagesPreClean = 4 * [0]
+        for index, value in enumerate(cellDictionary.keys()):
+            print(str(value) + str(averagesPreClean))
+            averagesPreClean[index] = engageAndGatherCurrentAverage(value)
+            if(isinstance(averagesPreClean[index],str)):
+                return averagesPreClean[index]
 
-    # Step 3
+    # Engage ALL EDS modules
     eds.engagePowerSupplyAndClean()
     eds.disengagePowerSupply()
 
-    # Step 4
-    gpio.engageGPIO(selectedCell)
-    try:
-        averagePostClean = adc.gatherADCData()
-    except ValueError as error:
-        gpio.disengageGPIO(selectedCell)
-        return repr(error)
-    gpio.disengageGPIO(selectedCell)
+    # Gather post-cleaning averages
+    if(not bulk):
+        averagePostClean = engageAndGatherCurrentAverage(selectedCell)
+    else:
+        averagesPostClean = 4 * [0]
+        for index, value in enumerate(cellDictionary.keys()):
+            print(str(value) + str(averagesPostClean))
+            averagesPostClean[index] = engageAndGatherCurrentAverage(value)
+            if(isinstance(averagesPostClean[index],str)):
+                return averagesPostClean[index]
 
-    # Step 5 ADD IN DATE AND TIME ISOLATION AND TEMPERATURE AND HUMIDITY
-    ratio = 0
-    if averagePreClean != 0:
-        ratio = averagePostClean/averagePreClean
+    # Calculate ratios, get dht11 results and store data
+    if(not bulk):
+        ratio = 0
+        if(averagePreClean != 0):
+            ratio = averagePostClean/averagePreClean
+        else:
+            ratio = 0
+    else:
+        ratioArray = 4 * [0]
+        for index, value in enumerate(averagesPreClean):
+            if(averagesPreClean[index] != 0):
+                ratioArray[index] = averagesPostClean[index]/averagesPreClean[index]
 
     dhtResult = getTemperatureAndHumidity()
 
@@ -64,16 +72,46 @@ def runEDSTest(selectedCell):
         temperature = dhtResult.temperature
         humidity = dhtResult.humidity
 
-        transporter.transportToBufferFile(ratio,selectedCell,time.strftime("%x"),time.strftime("%X"),temperature,humidity)
-        transporter.transportToDB(ratio,cellDictionary[selectedCell],time.strftime("%x"),time.strftime("%X"),temperature,humidity)
+        if(not bulk):
+            transporter.transportToBufferFile(ratio,selectedCell,time.strftime("%x"),time.strftime("%X"),temperature,humidity)
+            transporter.transportToDB(ratio,cellDictionary[selectedCell],time.strftime("%x"),time.strftime("%X"),temperature,humidity)
+        else:
+            for i in range(len(ratioArray)):
+                transporter.transportToBufferFile(ratioArray[i],i+1,time.strftime("%x"),time.strftime("%X"),temperature,humidity)
+                transporter.transportToDB(ratioArray[i],i+1,time.strftime("%x"),time.strftime("%X"),temperature,humidity)
     else:
-        transporter.transportToBufferFile(ratio,selectedCell,time.strftime("%x"),time.strftime("%X"))
-        transporter.transportToDB(ratio,cellDictionary[selectedCell],time.strftime("%x"),time.strftime("%X"),0,0)
+        if(not bulk):
+            transporter.transportToBufferFile(ratio,selectedCell,time.strftime("%x"),time.strftime("%X"))
+            transporter.transportToDB(ratio,cellDictionary[selectedCell],time.strftime("%x"),time.strftime("%X"),0,0)
+        else:
+            for i in range(len(ratioArray)):
+                transporter.transportToBufferFile(ratioArray[i],i+1,time.strftime("%x"),time.strftime("%X"),temperature,humidity)
+                transporter.transportToDB(ratioArray[i],i+1,time.strftime("%x"),time.strftime("%X"),temperature,humidity)
 
-    return ratio
+    if(not bulk):
+        return ratio
+    else:
+        return ratioArray
 
 '''
-This function returns 
+This utility turns on the gpio for the selected cell and returns the average current for twenty measurements
+'''
+def engageAndGatherCurrentAverage(selectedCell):
+    GPIO.setmode(GPIO.BCM)
+    gpio = GPIOControlFactory(0)
+    adc = ADCControlFactory(0)
+
+    gpio.engageGPIO(selectedCell)
+    try:
+        averageCurrent = adc.gatherADCData()
+        gpio.disengageGPIO(selectedCell)
+        return averageCurrent
+    except ValueError as error:
+        gpio.disengageGPIO(selectedCell)
+        return repr(error)
+
+'''
+This function returns temperature and humidity from the dht11 sensor
 '''
 def getTemperatureAndHumidity():
     GPIO.setmode(GPIO.BCM)
