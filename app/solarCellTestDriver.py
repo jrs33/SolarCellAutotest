@@ -76,17 +76,17 @@ def runEDSTest(selectedCell, bulk=False):
             transporter.transportToBufferFile(ratio,selectedCell,time.strftime("%x"),time.strftime("%X"),temperature,humidity)
             transporter.transportToDB(ratio,cellDictionary[selectedCell],time.strftime("%x"),time.strftime("%X"),temperature,humidity)
         else:
-            for i in range(len(ratioArray)):
-                transporter.transportToBufferFile(ratioArray[i],i+1,time.strftime("%x"),time.strftime("%X"),temperature,humidity)
-                transporter.transportToDB(ratioArray[i],i+1,time.strftime("%x"),time.strftime("%X"),temperature,humidity)
+            for index, value in enumerate(cellDictionary.keys()):
+                transporter.transportToBufferFile(ratioArray[index],value,time.strftime("%x"),time.strftime("%X"),temperature,humidity)
+                transporter.transportToDB(ratioArray[index],value,time.strftime("%x"),time.strftime("%X"),temperature,humidity)
     else:
         if(not bulk):
             transporter.transportToBufferFile(ratio,selectedCell,time.strftime("%x"),time.strftime("%X"))
             transporter.transportToDB(ratio,cellDictionary[selectedCell],time.strftime("%x"),time.strftime("%X"),0,0)
         else:
-            for i in range(len(ratioArray)):
-                transporter.transportToBufferFile(ratioArray[i],i+1,time.strftime("%x"),time.strftime("%X"),temperature,humidity)
-                transporter.transportToDB(ratioArray[i],i+1,time.strftime("%x"),time.strftime("%X"),temperature,humidity)
+            for index, value in enumerate(cellDictionary.keys()):
+                transporter.transportToBufferFile(ratioArray[index],value,time.strftime("%x"),time.strftime("%X"))
+                transporter.transportToDB(ratioArray[index],value,time.strftime("%x"),time.strftime("%X"),0,0)
 
     if(not bulk):
         return ratio
